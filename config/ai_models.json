@@ -1,0 +1,266 @@
+{
+  "ai_models_config": {
+    "version": "1.0.0",
+    "last_updated": "2024-01-15",
+    "description": "AI model configuration for MyKeyPair cybersecurity website",
+    
+    "ollama": {
+      "enabled": true,
+      "host": "localhost",
+      "port": 11434,
+      "timeout": 60,
+      "max_retries": 3,
+      "health_check_interval": 300,
+      "models": {
+        "primary": {
+          "name": "llama3.2",
+          "description": "Primary model for general AI tasks and content analysis",
+          "use_cases": ["content_analysis", "lead_qualification", "document_summarization"],
+          "parameters": {
+            "temperature": 0.7,
+            "max_tokens": 2048,
+            "top_p": 0.9,
+            "frequency_penalty": 0.1,
+            "presence_penalty": 0.1
+          }
+        },
+        "analytical": {
+          "name": "llama3.1",
+          "description": "Analytical model for technical content and compliance analysis",
+          "use_cases": ["compliance_detection", "technical_analysis", "risk_assessment"],
+          "parameters": {
+            "temperature": 0.3,
+            "max_tokens": 1024,
+            "top_p": 0.8,
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0
+          }
+        },
+        "creative": {
+          "name": "llama3.2",
+          "description": "Creative model for content generation and blog writing",
+          "use_cases": ["blog_generation", "content_creation", "marketing_copy"],
+          "parameters": {
+            "temperature": 0.8,
+            "max_tokens": 3072,
+            "top_p": 0.95,
+            "frequency_penalty": 0.3,
+            "presence_penalty": 0.2
+          }
+        },
+        "fallback": {
+          "name": "phi3",
+          "description": "Lightweight fallback model for basic tasks",
+          "use_cases": ["basic_analysis", "simple_classification"],
+          "parameters": {
+            "temperature": 0.5,
+            "max_tokens": 512,
+            "top_p": 0.85,
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0
+          }
+        }
+      },
+      "system_prompts": {
+        "cybersecurity_expert": "You are a senior cybersecurity consultant at MyKeyPair, a professional cybersecurity consulting firm. You have expertise in PKI, compliance frameworks, risk assessment, and security architecture. Provide professional, actionable advice based on industry best practices.",
+        "content_analyst": "You are a content analyst specializing in cybersecurity communications. Analyze content for security implications, compliance requirements, and business impact. Provide structured, objective assessments.",
+        "lead_qualifier": "You are a cybersecurity sales expert helping qualify leads for consulting services. Assess lead quality based on technical needs, budget indicators, urgency, and business impact.",
+        "technical_writer": "You are a technical writer and cybersecurity thought leader. Create clear, authoritative content that demonstrates expertise while being accessible to the target audience."
+      }
+    },
+
+    "huggingface": {
+      "enabled": true,
+      "cache_directory": "./model_cache",
+      "device": "auto",
+      "max_memory_usage": "8GB",
+      "models": {
+        "sentiment_analysis": {
+          "model_name": "cardiffnlp/twitter-roberta-base-sentiment-latest",
+          "task": "sentiment-analysis",
+          "description": "Advanced sentiment analysis for lead qualification",
+          "confidence_threshold": 0.7,
+          "use_cases": ["lead_sentiment", "content_sentiment", "customer_feedback"],
+          "fallback_model": "distilbert-base-uncased-finetuned-sst-2-english"
+        },
+        "zero_shot_classification": {
+          "model_name": "facebook/bart-large-mnli",
+          "task": "zero-shot-classification",
+          "description": "Service type classification and content categorization",
+          "confidence_threshold": 0.6,
+          "use_cases": ["service_classification", "content_categorization"],
+          "service_labels": [
+            "PKI Implementation",
+            "Compliance Consulting", 
+            "Security Assessment",
+            "Penetration Testing",
+            "Incident Response",
+            "Security Architecture",
+            "Risk Management",
+            "Security Training",
+            "General Consultation"
+          ]
+        },
+        "embeddings": {
+          "model_name": "all-MiniLM-L6-v2",
+          "task": "sentence-similarity",
+          "description": "Sentence embeddings for semantic similarity and clustering",
+          "use_cases": ["content_similarity", "duplicate_detection", "semantic_search"],
+          "embedding_dimension": 384
+        },
+        "text_classification": {
+          "model_name": "microsoft/DialoGPT-medium",
+          "task": "text-classification",
+          "description": "General text classification for content analysis",
+          "confidence_threshold": 0.5,
+          "use_cases": ["content_classification", "topic_modeling"],
+          "fallback_enabled": true
+        }
+      },
+      "processing_limits": {
+        "max_input_length": 512,
+        "batch_size": 8,
+        "max_concurrent_requests": 4,
+        "timeout_seconds": 30
+      }
+    },
+
+    "content_analysis": {
+      "enabled": true,
+      "compliance_frameworks": {
+        "detection_enabled": true,
+        "confidence_threshold": 0.1,
+        "supported_frameworks": [
+          "GDPR",
+          "SOX", 
+          "HIPAA",
+          "PCI-DSS",
+          "ISO27001",
+          "NIST",
+          "CCPA",
+          "SOC2",
+          "FERPA",
+          "GLBA"
+        ],
+        "keyword_patterns": {
+          "GDPR": ["gdpr", "general data protection regulation", "data protection", "privacy by design", "data subject rights", "data controller", "data processor", "right to be forgotten"],
+          "SOX": ["sarbanes-oxley", "sox", "financial reporting", "audit controls", "internal controls", "financial disclosure", "public company accounting"],
+          "HIPAA": ["hipaa", "health insurance portability", "phi", "protected health information", "healthcare data", "medical records", "health information"],
+          "PCI-DSS": ["pci-dss", "pci dss", "payment card industry", "cardholder data", "payment processing", "card data security", "payment system"],
+          "ISO27001": ["iso 27001", "iso27001", "information security management", "isms", "security controls", "iso certification", "information security"],
+          "NIST": ["nist", "cybersecurity framework", "nist csf", "security controls", "nist 800-53", "risk management framework", "nist guidelines"],
+          "CCPA": ["ccpa", "california consumer privacy act", "consumer privacy", "personal information", "data sales disclosure", "california privacy"]
+        }
+      },
+      "risk_assessment": {
+        "enabled": true,
+        "risk_keywords": {
+          "high": ["breach", "attack", "compromised", "hacked", "malware", "ransomware", "critical vulnerability"],
+          "medium": ["vulnerability", "threat", "risk", "security issue", "incident", "exposure"],
+          "low": ["security review", "assessment", "improvement", "enhancement", "upgrade"]
+        },
+        "urgency_keywords": {
+          "urgent": ["urgent", "asap", "immediately", "emergency", "critical", "deadline"],
+          "moderate": ["need", "require", "important", "priority", "soon", "quickly"],
+          "low": ["planning", "future", "considering", "exploring", "evaluate"]
+        }
+      },
+      "business_impact": {
+        "enabled": true,
+        "impact_indicators": {
+          "high": ["revenue", "financial", "business critical", "operations", "customers", "reputation"],
+          "medium": ["productivity", "efficiency", "competitive", "growth", "performance"],
+          "low": ["internal", "administrative", "maintenance", "routine"]
+        },
+        "size_indicators": {
+          "enterprise": ["enterprise", "fortune", "billion", "global", "multinational", "large-scale"],
+          "mid_market": ["mid-size", "regional", "million", "growing", "expanding"],
+          "small_business": ["small", "startup", "local", "boutique", "family-owned"]
+        }
+      }
+    },
+
+    "lead_qualification": {
+      "enabled": true,
+      "scoring_weights": {
+        "technical_complexity": 0.2,
+        "business_impact": 0.3,
+        "urgency": 0.2,
+        "compliance_need": 0.15,
+        "message_quality": 0.15
+      },
+      "thresholds": {
+        "high_priority": 80,
+        "medium_priority": 60,
+        "low_priority": 40
+      },
+      "qualification_factors": {
+        "company_provided": 20,
+        "phone_provided": 10,
+        "service_specified": 25,
+        "detailed_message": 15,
+        "budget_mentioned": 30
+      }
+    },
+
+    "performance": {
+      "monitoring": {
+        "enabled": true,
+        "log_response_times": true,
+        "alert_slow_responses": true,
+        "slow_response_threshold_ms": 5000
+      },
+      "caching": {
+        "enabled": true,
+        "cache_duration_minutes": 60,
+        "max_cache_size_mb": 500,
+        "cache_similar_requests": true,
+        "similarity_threshold": 0.95
+      },
+      "rate_limiting": {
+        "enabled": true,
+        "requests_per_minute": 100,
+        "burst_allowance": 20,
+        "cool_down_period_minutes": 5
+      }
+    },
+
+    "security": {
+      "data_privacy": {
+        "enabled": true,
+        "anonymize_logs": true,
+        "retain_processed_data_days": 30,
+        "encrypt_sensitive_data": true,
+        "pii_detection": true
+      },
+      "model_security": {
+        "validate_inputs": true,
+        "sanitize_outputs": true,
+        "prevent_injection": true,
+        "audit_model_calls": true
+      }
+    },
+
+    "fallback_strategy": {
+      "enabled": true,
+      "fallback_order": [
+        "huggingface_basic",
+        "rule_based",
+        "default_response"
+      ],
+      "auto_fallback_on_error": true,
+      "max_fallback_attempts": 3,
+      "fallback_timeout_seconds": 10
+    },
+
+    "development": {
+      "debug_mode": false,
+      "verbose_logging": false,
+      "model_testing": {
+        "enabled": true,
+        "test_on_startup": true,
+        "performance_benchmarks": true
+      }
+    }
+  }
+}
