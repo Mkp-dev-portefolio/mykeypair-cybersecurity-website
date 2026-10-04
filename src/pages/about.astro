@@ -1,0 +1,169 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const techStack = [
+  "EJBCA", "OpenSSL", "Docker", "Caddy", "PostgreSQL",
+  "Nitrokey HSM", "OpenBao/Vault", "Python", "Bash", "Linux",
+  "Tailwind", "Astro", "Next.js", "n8n", "Terraform",
+  "Nmap", "Lynis", "Wireshark"
+];
+
+const credentials = [
+  { label: 'CISSP', sub: 'Certified Information Systems Security Professional', org: '(ISC)²', color: 'gold' },
+  { label: 'PKI', sub: 'Public Key Infrastructure Architecture', org: 'EJBCA · OpenSSL · HSM · X.509', color: 'teal' },
+  { label: 'DORA', sub: 'Digital Operational Resilience Act', org: 'EU Compliance for Financial Sector', color: 'green' },
+];
+
+const stats = [
+  { n: '6+', l: 'Years PKI engineering' },
+  { n: '100%', l: 'Senior-only delivery' },
+  { n: '5', l: 'EU financial institutions' },
+  { n: '0', l: 'Juniors on your project' },
+];
+---
+
+<Layout title="About" description="About Ismail Zemouri — CISSP, PKI Architect">
+
+  <!-- Page header -->
+  <section class="py-24 mesh-gradient">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <span class="inline-block text-xs font-semibold tracking-widest uppercase text-(--color-accent) bg-(--color-teal-glow) border border-(--color-teal-edge) rounded-full px-4 py-1 mb-6">
+        About
+      </span>
+      <h1 class="font-display text-4xl md:text-5xl font-bold mb-5 tracking-tight">
+        Senior expertise. Zero juniors.<br class="hidden md:block"/> No fluff.
+      </h1>
+      <p class="text-(--color-fg-muted) text-lg max-w-xl mx-auto">
+        Brussels-based PKI boutique. One engineer, full accountability.
+      </p>
+    </div>
+  </section>
+
+  <!-- About block — asymmetric layout -->
+  <section class="py-24" style="background: var(--color-bg);">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-[340px_1fr] gap-14 items-start">
+
+        <!-- Photo card -->
+        <div class="relative aspect-[3/4] bg-(--color-surface) border border-(--color-border) rounded-xl overflow-hidden flex items-center justify-center card-hover">
+          <div class="text-center">
+            <div class="font-display text-8xl font-black text-(--color-accent) tracking-tighter opacity-40 mb-3">IZ</div>
+            <div class="text-xs text-(--color-fg-muted) font-mono">Ismail Zemouri, CISSP</div>
+          </div>
+          <!-- Top accent bar -->
+          <div class="absolute top-0 left-0 right-0 h-0.5" style="background: linear-gradient(90deg, var(--color-accent), transparent);"></div>
+        </div>
+
+        <!-- Bio -->
+        <div>
+          <span class="inline-block text-xs font-semibold tracking-widest uppercase text-(--color-accent) bg-(--color-teal-glow) border border-(--color-teal-edge) rounded-full px-4 py-1 mb-5">About</span>
+          <h2 class="font-display text-3xl md:text-4xl font-bold mb-6 tracking-tight leading-tight">
+            MYKEYPAIR is led by<br/>
+            <span class="text-(--color-accent)">Ismail Zemouri, CISSP</span>
+          </h2>
+          <p class="text-(--color-fg-2) leading-relaxed mb-5">
+            6+ years of hands-on PKI engineering across EU banks, financial market infrastructure, and critical utilities. Previous engagements with leading EU financial institutions, a major central bank, critical infrastructure operators, and a global automotive group.
+          </p>
+          <p class="text-(--color-fg-2) leading-relaxed mb-5">
+            With deep expertise in Public Key Infrastructure, Hardware Security Modules, and EU regulatory compliance (DORA, eIDAS, PSD2), I help financial institutions design, evaluate, and deploy enterprise PKI and KMS solutions. My work spans the full lifecycle: from writing RFPs and evaluating vendor responses to hands-on deployment, key ceremony procedures, and compliance documentation.
+          </p>
+          <p class="text-(--color-fg-2) leading-relaxed mb-8">
+            Vendor-agnostic. EJBCA, Microsoft ADCS, HashiCorp Vault, enterprise HSMs, AWS CloudHSM — the tool follows the architecture, not the other way around.
+          </p>
+
+          <!-- Credential chips -->
+          <div class="flex flex-wrap gap-2 mb-8">
+            {['CISSP', 'ETSI EN 319', 'EJBCA PKI CA', 'HSM integration', 'DORA', 'eIDAS'].map(chip => (
+              <span class="text-xs font-medium text-(--color-fg-2) bg-(--color-bg-deep) border border-(--color-border) rounded-md px-3 py-1.5 font-mono">{chip}</span>
+            ))}
+          </div>
+
+          <!-- Social links -->
+          <div class="flex gap-3">
+            <a href="https://www.linkedin.com/in/ismail-zemouri-mkp" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-2.5 bg-(--color-surface) border border-(--color-border) rounded-lg text-sm text-(--color-fg-2) hover:border-(--color-teal-edge) hover:text-(--color-fg) transition-all">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn
+            </a>
+            <a href="https://github.com/mykeypair" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-2.5 bg-(--color-surface) border border-(--color-border) rounded-lg text-sm text-(--color-fg-2) hover:border-(--color-teal-edge) hover:text-(--color-fg) transition-all">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats strip -->
+  <section style="background: var(--color-bg-alt);">
+    <div class="max-w-7xl mx-auto px-6 py-1">
+      <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-(--color-border) border border-(--color-border) rounded-xl overflow-hidden">
+        {stats.map(s => (
+          <div class="px-6 py-7 text-center bg-(--color-surface)">
+            <div class="font-display text-4xl font-black text-(--color-accent) tracking-tight mb-1">{s.n}</div>
+            <div class="text-xs text-(--color-fg-muted) uppercase tracking-widest font-medium">{s.l}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Credentials -->
+  <section class="py-24" style="background: var(--color-bg-alt);">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="font-display text-2xl md:text-3xl font-bold mb-12 text-center tracking-tight">Credentials & Expertise</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <div class="relative bg-(--color-surface) rounded-xl p-8 border border-(--color-border) card-accent overflow-hidden card-hover text-center">
+          <div class="font-display text-5xl font-black mb-3 tracking-tight" style="color: var(--color-gold);">CISSP</div>
+          <div class="text-(--color-fg-2) text-sm mb-1">Certified Information Systems Security Professional</div>
+          <div class="text-(--color-fg-muted) text-xs font-mono">(ISC)²</div>
+        </div>
+
+        <div class="relative bg-(--color-surface) rounded-xl p-8 border border-(--color-border) overflow-hidden card-hover text-center" style="border-top: 2px solid var(--color-accent);">
+          <div class="font-display text-5xl font-black mb-3 tracking-tight text-(--color-accent)">PKI</div>
+          <div class="text-(--color-fg-2) text-sm mb-1">Public Key Infrastructure Architecture</div>
+          <div class="text-(--color-fg-muted) text-xs font-mono">EJBCA · OpenSSL · HSM · X.509</div>
+        </div>
+
+        <div class="relative bg-(--color-surface) rounded-xl p-8 border border-(--color-border) overflow-hidden card-hover text-center" style="border-top: 2px solid var(--color-green);">
+          <div class="font-display text-5xl font-black mb-3 tracking-tight text-(--color-green)">DORA</div>
+          <div class="text-(--color-fg-2) text-sm mb-1">Digital Operational Resilience Act</div>
+          <div class="text-(--color-fg-muted) text-xs font-mono">EU Compliance for Financial Sector</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech stack -->
+  <section class="py-24" style="background: var(--color-bg);">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="font-display text-2xl md:text-3xl font-bold mb-3 text-center tracking-tight">Technology Stack</h2>
+      <p class="text-(--color-fg-muted) text-center mb-10">Tools I reach for. Vendor-agnostic by design.</p>
+      <div class="flex flex-wrap justify-center gap-2.5">
+        {techStack.map(tech => (
+          <span class="px-4 py-2 bg-(--color-surface) rounded-lg text-sm border border-(--color-border) text-(--color-fg-muted) font-mono hover:border-(--color-teal-edge) hover:text-(--color-fg) transition-colors cursor-default">{tech}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-24 mesh-gradient">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="relative bg-(--color-surface) border border-(--color-teal-edge) rounded-2xl p-16 overflow-hidden text-center">
+        <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse at 50% 100%, rgba(14,165,233,0.12) 0%, transparent 60%);"></div>
+        <div class="relative">
+          <span class="inline-block text-xs font-semibold tracking-widest uppercase text-(--color-gold) bg-(--color-gold-bg) border border-(--color-gold-edge) rounded-full px-4 py-1 mb-6">✦ CISSP</span>
+          <h2 class="font-display text-2xl md:text-3xl font-bold mb-4 tracking-tight">Work with a senior PKI engineer</h2>
+          <p class="text-(--color-fg-muted) mb-8">30-minute discovery call — no junior handoffs, no sales deck.</p>
+          <a href="/contact" class="inline-flex items-center gap-2 px-8 py-4 bg-(--color-accent) text-white rounded-lg font-semibold font-display hover:bg-(--color-accent-hover) transition-all btn-glow">
+            Schedule a Call →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>

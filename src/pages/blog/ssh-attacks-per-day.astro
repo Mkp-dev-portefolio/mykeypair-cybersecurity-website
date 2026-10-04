@@ -1,0 +1,100 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="200+ SSH Attacks Per Day" description="What SSH brute-force attackers try and how to stop them.">
+  <article class="py-20 bg-(--color-darker)">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="text-xs font-mono-custom px-3 py-1 rounded-full border border-(--color-accent)/30 text-(--color-accent)">Threat Intel</span>
+          <span class="text-xs text-(--color-muted)">6 min read · March 28, 2026</span>
+        </div>
+        <h1 class="font-heading text-4xl md:text-5xl font-bold leading-tight mb-6">200+ SSH Brute-Force Attacks Per Day: What the Attackers Are Trying</h1>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-(--color-accent)/20 flex items-center justify-center"><span class="text-sm font-bold text-(--color-accent)">IZ</span></div>
+          <div><div class="text-sm font-medium">Ismail Zemouri</div><div class="text-xs text-(--color-muted)">CISSP · PKI Architect</div></div>
+        </div>
+      </div>
+
+      <div class="space-y-6 text-(--color-muted) leading-relaxed">
+        <p class="text-lg text-(--color-light)">My VPS gets over 200 SSH brute-force attempts every day. In 48 hours, fail2ban banned 191 unique IP addresses. Here's what the attackers are doing and where they come from.</p>
+
+        <h2 class="font-heading text-2xl font-bold text-(--color-light) mt-12 mb-4">The Attackers</h2>
+
+        <p>Three IPs stood out during my monitoring window. I reverse-scanned each one:</p>
+
+        <div class="bg-(--color-card) rounded-xl p-6 border border-white/10 my-8 space-y-6 text-sm">
+          <div>
+            <div class="text-(--color-accent) font-semibold mb-1">Alibaba Cloud, Beijing</div>
+            <p>A compromised app server running ancient software: OpenSSH 7.4, nginx 1.20.1, Node.js/Express, PostgreSQL 14 — all exposed. 23 known CVEs. Tagged "eol-product" by Shodan. Classic botnet node: someone's legitimate server got owned and is now scanning the internet.</p>
+          </div>
+          <div>
+            <div class="text-(--color-cyber) font-semibold mb-1">Snowd Security, Helsinki</div>
+            <p>An Estonian VPN company's IP. No Shodan data (dark IP). Tried usernames: admin, orangepi, root. Either a VPN customer using their service to scan, or a compromised exit node.</p>
+          </div>
+          <div>
+            <div class="text-(--color-emerald) font-semibold mb-1">IONOS, Kansas City</div>
+            <p>Bare-bones Ubuntu VPS running only SSH. No web server, no other services. A disposable box spun up specifically for scanning.</p>
+          </div>
+        </div>
+
+        <h2 class="font-heading text-2xl font-bold text-(--color-light) mt-12 mb-4">What They Try</h2>
+
+        <div class="bg-(--color-card) rounded-xl border border-white/10 overflow-hidden my-8">
+          <div class="flex items-center gap-2 px-4 py-3 bg-black/30 border-b border-white/5">
+            <div class="w-3 h-3 rounded-full bg-red-500/80"></div><div class="w-3 h-3 rounded-full bg-yellow-500/80"></div><div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+            <span class="text-xs text-(--color-muted) ml-2 font-mono-custom">SSH log — one attacker, 6 seconds</span>
+          </div>
+          <div class="p-6 font-mono-custom text-sm">
+            <p class="text-(--color-muted)">20:46:30 Invalid user <span class="text-red-400">admin</span> from 149.82.x.x</p>
+            <p class="text-(--color-muted)">20:46:31 Connection closed by authenticating user <span class="text-red-400">root</span></p>
+            <p class="text-(--color-muted)">20:46:32 Connection closed by authenticating user <span class="text-red-400">root</span></p>
+            <p class="text-(--color-muted)">20:46:34 Invalid user <span class="text-red-400">x</span> from 149.82.x.x</p>
+            <p class="text-(--color-muted)">20:46:35 Invalid user <span class="text-red-400">db2fenc1</span> from 149.82.x.x</p>
+            <p class="text-(--color-muted)">20:46:36 Invalid user <span class="text-red-400">deploy</span> from 149.82.x.x</p>
+          </div>
+        </div>
+
+        <p>Six usernames in six seconds. The interesting ones:</p>
+
+        <ul class="space-y-2 ml-4 text-sm">
+          <li><strong class="text-(--color-light)">db2fenc1</strong> — IBM DB2 service account. They're hunting for database servers.</li>
+          <li><strong class="text-(--color-light)">deploy</strong> — CI/CD pipeline account. Looking for DevOps servers.</li>
+          <li><strong class="text-(--color-light)">orangepi</strong> — IoT device default user. Targeting embedded systems.</li>
+          <li><strong class="text-(--color-light)">caddy</strong> — Web server service account. They know common stack names.</li>
+          <li><strong class="text-(--color-light)">oracle</strong> — Database server targeting.</li>
+          <li><strong class="text-(--color-light)">kafka</strong> — Streaming platform targeting.</li>
+        </ul>
+
+        <p>These aren't random. They're curated wordlists targeting specific technologies.</p>
+
+        <h2 class="font-heading text-2xl font-bold text-(--color-light) mt-12 mb-4">Why They'll Never Get In</h2>
+
+        <div class="bg-(--color-card) rounded-xl p-6 border border-white/10 my-8 font-mono-custom text-sm">
+          <p class="text-(--color-emerald)">PermitRootLogin no</p>
+          <p class="text-(--color-emerald)">PasswordAuthentication no</p>
+          <p class="text-(--color-emerald)">PubkeyAuthentication yes</p>
+          <p class="text-(--color-emerald)">MaxAuthTries 3</p>
+          <p class="text-(--color-emerald)">AllowUsers ubuntu</p>
+        </div>
+
+        <p>Password authentication is <strong class="text-(--color-light)">completely disabled</strong>. They're trying passwords against a door that doesn't accept passwords. It's like trying every key on a keyring against a door that only opens with a fingerprint.</p>
+
+        <p>fail2ban bans IPs after 3 failed attempts. UFW blocks everything except needed ports. The attacks are noise — but monitoring them tells you what the threat landscape looks like.</p>
+
+        <h2 class="font-heading text-2xl font-bold text-(--color-light) mt-12 mb-4">Set Up Your Own Monitoring</h2>
+
+        <div class="bg-(--color-card) rounded-xl p-4 border border-white/10 font-mono-custom text-sm my-4">
+          <p>sudo apt install fail2ban</p>
+          <p class="text-(--color-muted) mt-1"># Check banned IPs:</p>
+          <p>sudo fail2ban-client status sshd</p>
+        </div>
+
+        <p>If you're running a public-facing server without key-only SSH and fail2ban, you're one weak password away from compromise.</p>
+      </div>
+
+      <div class="mt-16 pt-8 border-t border-white/5"><a href="/blog" class="text-(--color-accent) hover:text-(--color-accent-light) text-sm font-medium">&larr; Back to Blog</a></div>
+    </div>
+  </article>
+</Layout>

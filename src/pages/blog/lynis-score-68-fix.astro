@@ -1,0 +1,126 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Lynis Score 68 to 77" description="Linux server hardening with CIS benchmarks — 10 changes in 15 minutes.">
+  <article class="py-20 bg-(--color-darker)">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="text-xs font-mono-custom px-3 py-1 rounded-full border border-(--color-emerald)/30 text-(--color-emerald)">Hardening</span>
+          <span class="text-xs text-(--color-muted)">5 min read · March 28, 2026</span>
+        </div>
+        <h1 class="font-heading text-4xl md:text-5xl font-bold leading-tight mb-6">Your Linux Server Has a Lynis Score of 68. Here's How to Fix It.</h1>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-(--color-accent)/20 flex items-center justify-center"><span class="text-sm font-bold text-(--color-accent)">IZ</span></div>
+          <div><div class="text-sm font-medium">Ismail Zemouri</div><div class="text-xs text-(--color-muted)">CISSP · PKI Architect</div></div>
+        </div>
+      </div>
+
+      <div class="space-y-6 text-(--color-muted) leading-relaxed">
+        <p class="text-lg text-(--color-light)">I ran Lynis on a fresh Ubuntu 24.04 server running Docker, Caddy, and a PKI stack. Score: 68/100 with 45 suggestions. Fifteen minutes later: 77/100. Here are the 10 changes that made the difference.</p>
+
+        <div class="bg-(--color-card) rounded-xl border border-white/10 overflow-hidden my-8">
+          <div class="flex items-center gap-2 px-4 py-3 bg-black/30 border-b border-white/5">
+            <div class="w-3 h-3 rounded-full bg-red-500/80"></div><div class="w-3 h-3 rounded-full bg-yellow-500/80"></div><div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+            <span class="text-xs text-(--color-muted) ml-2 font-mono-custom">before</span>
+          </div>
+          <div class="p-6 font-mono-custom text-sm">
+            <p><span class="text-(--color-emerald)">$</span> sudo lynis audit system --quick</p>
+            <p class="mt-2">Hardening index : <span class="text-red-400">68</span> [#############&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</p>
+            <p>Tests performed : 268</p>
+            <p>Warnings: 1 | Suggestions: 45</p>
+          </div>
+        </div>
+
+        <h2 class="font-heading text-2xl font-bold text-(--color-light) mt-12 mb-4">The 10 Fixes</h2>
+
+        <p><strong class="text-(--color-light)">1. Enable auditd</strong> — audit logging for compliance</p>
+        <div class="bg-(--color-card) rounded-xl p-4 border border-white/10 font-mono-custom text-sm my-4">
+          <p>sudo apt install auditd && sudo systemctl enable --now auditd</p>
+        </div>
+
+        <p><strong class="text-(--color-light)">2. Install file integrity monitoring (AIDE)</strong></p>
+        <div class="bg-(--color-card) rounded-xl p-4 border border-white/10 font-mono-custom text-sm my-4">
+          <p>sudo apt install aide && sudo aideinit</p>
+        </div>
+
+        <p><strong class="text-(--color-light)">3. Install rootkit scanner</strong></p>
+        <div class="bg-(--color-card) rounded-xl p-4 border border-white/10 font-mono-custom text-sm my-4">
+          <p>sudo apt install rkhunter && sudo rkhunter --propupd</p>
+        </div>
+
+        <p><strong class="text-(--color-light)">4. Harden SSH</strong> — 8 settings in one drop-in file</p>
+        <div class="bg-(--color-card) rounded-xl p-4 border border-white/10 font-mono-custom text-sm my-4">
+          <p class="text-(--color-muted)"># /etc/ssh/sshd_config.d/99-hardening.conf</p>
+          <p>AllowTcpForwarding no</p>
+          <p>ClientAliveCountMax 2</p>
+          <p>ClientAliveInterval 300</p>
+          <p>LogLevel VERBOSE</p>
+          <p>MaxSessions 2</p>
+          <p>AllowUsers ubuntu</p>
+          <p>X11Forwarding no</p>
+          <p>Compression no</p>
+        </div>
+
+        <p><strong class="text-(--color-light)">5. Enable process accounting</strong></p>
+        <div class="bg-(--color-card) rounded-xl p-4 border border-white/10 font-mono-custom text-sm my-4">
+          <p>sudo apt install acct && sudo systemctl enable --now acct</p>
+        </div>
+
+        <p><strong class="text-(--color-light)">6. Disable unused network protocols</strong></p>
+        <div class="bg-(--color-card) rounded-xl p-4 border border-white/10 font-mono-custom text-sm my-4">
+          <p class="text-(--color-muted)"># /etc/modprobe.d/disable-unused-protocols.conf</p>
+          <p>install dccp /bin/true</p>
+          <p>install sctp /bin/true</p>
+          <p>install rds /bin/true</p>
+          <p>install tipc /bin/true</p>
+        </div>
+
+        <p><strong class="text-(--color-light)">7. Add legal banners</strong></p>
+        <div class="bg-(--color-card) rounded-xl p-4 border border-white/10 font-mono-custom text-sm my-4">
+          <p class="text-(--color-muted)"># /etc/issue and /etc/issue.net</p>
+          <p>AUTHORIZED ACCESS ONLY. All activities monitored and logged.</p>
+        </div>
+
+        <p><strong class="text-(--color-light)">8. Harden kernel (sysctl)</strong></p>
+        <div class="bg-(--color-card) rounded-xl p-4 border border-white/10 font-mono-custom text-sm my-4">
+          <p class="text-(--color-muted)"># /etc/sysctl.d/99-hardening.conf</p>
+          <p>kernel.sysrq = 0</p>
+          <p>net.ipv4.conf.all.log_martians = 1</p>
+          <p>net.ipv4.conf.all.send_redirects = 0</p>
+          <p>net.ipv4.conf.all.accept_redirects = 0</p>
+        </div>
+
+        <p><strong class="text-(--color-light)">9. Restrict compiler access</strong></p>
+        <div class="bg-(--color-card) rounded-xl p-4 border border-white/10 font-mono-custom text-sm my-4">
+          <p>sudo chmod o-rx /usr/bin/gcc* /usr/bin/g++* /usr/bin/cc</p>
+        </div>
+
+        <p><strong class="text-(--color-light)">10. Fix time synchronization</strong></p>
+        <div class="bg-(--color-card) rounded-xl p-4 border border-white/10 font-mono-custom text-sm my-4">
+          <p>sudo systemctl restart systemd-timesyncd</p>
+        </div>
+
+        <div class="bg-(--color-card) rounded-xl border border-white/10 overflow-hidden my-8">
+          <div class="flex items-center gap-2 px-4 py-3 bg-black/30 border-b border-white/5">
+            <div class="w-3 h-3 rounded-full bg-red-500/80"></div><div class="w-3 h-3 rounded-full bg-yellow-500/80"></div><div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+            <span class="text-xs text-(--color-muted) ml-2 font-mono-custom">after</span>
+          </div>
+          <div class="p-6 font-mono-custom text-sm">
+            <p><span class="text-(--color-emerald)">$</span> sudo lynis audit system --quick</p>
+            <p class="mt-2">Hardening index : <span class="text-(--color-emerald)">77</span> [###############&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</p>
+            <p>Tests performed : 268</p>
+            <p>Warnings: 0 | Suggestions: 33</p>
+          </div>
+        </div>
+
+        <p>68 → 77 with zero downtime. The remaining 33 suggestions are mostly partition layout changes and package cleanup — diminishing returns for a VPS.</p>
+
+        <p>Start with <code class="bg-(--color-card) px-2 py-1 rounded text-xs">sudo apt install lynis && sudo lynis audit system</code> and see where you stand.</p>
+      </div>
+
+      <div class="mt-16 pt-8 border-t border-white/5"><a href="/blog" class="text-(--color-accent) hover:text-(--color-accent-light) text-sm font-medium">&larr; Back to Blog</a></div>
+    </div>
+  </article>
+</Layout>

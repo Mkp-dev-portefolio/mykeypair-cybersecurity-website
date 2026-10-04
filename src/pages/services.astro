@@ -1,0 +1,404 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const services = [
+  {
+    id: 'pki',
+    icon: `<path d="M12 3 L3 8 L12 13 L21 8 Z"/><path d="M3 16 L12 21 L21 16"/><path d="M3 12 L12 17 L21 12"/>`,
+    label: 'PKI Architecture',
+    title: 'Enterprise Public Key Infrastructure',
+    body: 'Complete CA hierarchy design and deployment across regulated environments. Multi-platform expertise — EJBCA, Keyfactor Command, IDnomic/Eviden, AWS PCA — with mTLS integration for certificate-based authentication. From central banks to automotive OEMs.',
+    outcome: 'Your CA is live, documented, and audit-ready in 6 weeks',
+    features: [
+      '2-tier or 3-tier CA hierarchy',
+      'HSM integration (Thales Luna, Fortanix DSM, Nitrokey)',
+      'EJBCA, Keyfactor Command, IDnomic/Eviden, AWS PCA',
+      'Multi-CA orchestration and federation',
+      'OCSP & CRL distribution points',
+      'mTLS — certificate-based authentication across services',
+      'CP, CPS, and compliance documentation',
+    ],
+    deliverables: [
+      'Architecture Design Document',
+      'Docker Infrastructure (HA)',
+      'Certificate Policy (CP)',
+      'Certificate Practice Statement',
+      'Key Ceremony Procedure',
+      'SOPs (8 documents)',
+      'Monitoring & Alerting',
+    ],
+  },
+  {
+    id: 'clm',
+    icon: `<path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/>`,
+    label: 'Certificate Lifecycle',
+    title: 'Certificate Lifecycle Management',
+    body: 'Automate certificate discovery, enrollment, renewal, and alerting across your entire estate. Eliminate manual tracking and expired certificate incidents with ACME, EST, and SCEP workflows integrated into your existing toolchain.',
+    outcome: 'Zero expired certificates, full visibility in 4 weeks',
+    steps: [
+      { label: 'Discover', desc: 'Full inventory scan — every certificate in every system, mapped and classified' },
+      { label: 'Automate', desc: 'ACME, EST, SCEP auto-enrollment workflows replacing manual processes' },
+      { label: 'Monitor', desc: 'Expiry alerts, failure notifications, and audit trails at every renewal' },
+      { label: 'Report', desc: 'Compliance dashboard and evidence package ready for auditors' },
+    ],
+  },
+  {
+    id: 'compliance',
+    icon: `<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>`,
+    label: 'Regulatory Compliance',
+    title: 'DORA, NIS2 & EU Regulatory Compliance',
+    body: 'Compliance advisory for financial institutions and regulated enterprises navigating DORA, NIS2, and eIDAS 2.0. Gap analysis, control mapping, RFP drafting for PKI and KMS solutions, and threat modeling for cloud PKI environments.',
+    outcome: 'Audit-ready compliance package with evidence mapping',
+    areas: [
+      'DORA Article 6 & 7 gap analysis',
+      'NIS2 cryptographic controls mapping',
+      'eIDAS 2.0 readiness assessment',
+      'Certificate Policy & CPS authoring',
+      'RFP drafting and vendor evaluation',
+      'Threat modeling for cloud PKI',
+      'Key Management Policy documentation',
+      'Audit preparation and evidence package',
+    ],
+  },
+  {
+    id: 'pqc',
+    icon: `<circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M4.22 4.22l2.12 2.12m11.32 11.32 2.12 2.12M2 12h3m14 0h3M4.22 19.78l2.12-2.12m11.32-11.32 2.12-2.12"/>`,
+    label: 'Post-Quantum Readiness',
+    title: 'Post-Quantum Cryptography Readiness',
+    body: 'Prepare your cryptographic infrastructure for the post-quantum transition before it becomes a compliance requirement. Crypto-asset inventory, FIPS 203/204/205 migration planning (ML-DSA, ML-KEM), crypto-agility assessment, and hybrid certificate strategies.',
+    outcome: 'Know exactly what breaks when quantum arrives',
+    phases: [
+      { phase: '01', title: 'Inventory', desc: 'Crypto-asset taxonomy — every algorithm, key, and certificate in scope' },
+      { phase: '02', title: 'Assess', desc: 'Crypto-agility gaps, algorithm dependencies, and blast-radius mapping' },
+      { phase: '03', title: 'Plan', desc: 'PQC migration roadmap per FIPS 203/204/205 (ML-DSA, ML-KEM)' },
+      { phase: '04', title: 'Hybrid', desc: 'Dual-algorithm certificate strategies for phased, zero-downtime rollout' },
+    ],
+  },
+  {
+    id: 'iot',
+    icon: `<rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/>`,
+    label: 'IoT & Device Security',
+    title: 'IoT & Device Certificate Security',
+    body: 'Secure device authentication and firmware integrity for connected environments. SCEP/Intune/EAP-TLS device onboarding, Code Signing CA centralization, OT/ICS PKI, and connected vehicle certificate architectures using AWS PCA with SCEP.',
+    outcome: 'Every device authenticated, every firmware signed',
+    usecases: [
+      { icon: '🔐', title: 'Device Authentication', desc: 'SCEP, Intune MDM, and EAP-TLS for enterprise endpoints and OT/ICS devices' },
+      { icon: '✍️', title: 'Code Signing', desc: 'Centralized Code Signing CA — firmware and software integrity at scale' },
+      { icon: '⚙️', title: 'Connected OT/ICS', desc: 'PKI architectures for manufacturing and industrial environments using AWS PCA + SCEP' },
+    ],
+  },
+  {
+    id: 'pentest',
+    icon: `<path d="M9 11l3 3 6-6"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/>`,
+    label: 'Security Assessment',
+    title: "Find What's Broken Before Attackers Do",
+    body: 'Comprehensive vulnerability assessment and penetration testing. OSINT reconnaissance, network scanning, web application testing, and detailed remediation reports with findings ranked by business risk.',
+    outcome: 'Full report with exploitable findings ranked by business risk',
+    checks: [
+      'SSL/TLS Configuration',
+      'Certificate Chain',
+      'DNS Security',
+      'Email (SPF/DKIM/DMARC)',
+      'Web Application',
+      'SSH Hardening',
+      'Port Exposure',
+      'CIS Benchmarks',
+    ],
+  },
+];
+---
+
+<Layout title="Services" description="PKI consulting, certificate lifecycle management, EU regulatory compliance, post-quantum readiness, IoT device security, and penetration testing">
+
+  <!-- Page header -->
+  <section class="py-24 mesh-gradient">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <span class="inline-block text-xs font-semibold tracking-widest uppercase text-(--color-accent) bg-(--color-teal-glow) border border-(--color-teal-edge) rounded-full px-4 py-1 mb-6">
+        Services
+      </span>
+      <h1 class="font-display text-4xl md:text-5xl font-bold mb-5 tracking-tight">
+        Security infrastructure for<br class="hidden md:block"/> regulated industries
+      </h1>
+      <p class="text-(--color-fg-muted) text-lg max-w-2xl mx-auto leading-relaxed">
+        Six disciplines. One senior engineer. Brussels &amp; Tokyo.
+      </p>
+    </div>
+  </section>
+
+  <!-- 1. PKI Architecture & Deployment -->
+  <section id="pki" class="py-24" style="background: var(--color-bg);">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-start">
+        <div>
+          <span class="text-xs font-semibold tracking-widest uppercase text-(--color-accent) font-mono mb-5 block">PKI Architecture</span>
+          <h2 class="font-display text-3xl md:text-4xl font-bold mb-6 tracking-tight leading-tight">
+            Enterprise Public Key Infrastructure
+          </h2>
+          <p class="text-(--color-fg-muted) mb-8 leading-relaxed">
+            Complete CA hierarchy design and deployment across regulated environments. Multi-platform expertise — EJBCA, Keyfactor Command, IDnomic/Eviden, AWS PCA — with mTLS integration for certificate-based authentication. From central banks to automotive OEMs.
+          </p>
+          <ul class="space-y-3 mb-8">
+            {services[0].features.map(f => (
+              <li class="flex items-center gap-3 text-sm text-(--color-fg-2)">
+                <span class="w-1.5 h-1.5 rounded-full bg-(--color-accent) flex-shrink-0"></span>
+                {f}
+              </li>
+            ))}
+          </ul>
+          <!-- Outcome box -->
+          <div class="border-l-2 border-(--color-accent) pl-4 py-3 rounded-r-lg" style="background: rgba(14,165,233,0.07);">
+            <span class="text-xs font-semibold uppercase tracking-wider text-(--color-accent) block mb-1">Outcome</span>
+            <p class="text-sm font-semibold text-(--color-accent)">→ {services[0].outcome}</p>
+          </div>
+        </div>
+
+        <!-- Deliverables card -->
+        <div class="relative bg-(--color-surface) rounded-xl p-8 border border-(--color-border) card-accent overflow-hidden card-hover">
+          <h3 class="font-display font-semibold mb-6 text-(--color-gold) text-sm uppercase tracking-wider">Deliverables</h3>
+          <div class="space-y-3">
+            {services[0].deliverables.map(d => (
+              <div class="flex justify-between items-center border-b border-white/5 pb-3 last:border-0 last:pb-0">
+                <span class="text-sm text-(--color-fg-2)">{d}</span>
+                <span class="text-xs font-semibold text-(--color-green) bg-green-500/10 border border-green-500/20 rounded-full px-2.5 py-0.5">Included</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Certificate Lifecycle Management -->
+  <section id="clm" class="py-24" style="background: var(--color-bg-alt);">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-start">
+        <!-- Steps card (left) -->
+        <div class="relative bg-(--color-surface) rounded-xl p-8 border border-(--color-border) card-accent overflow-hidden card-hover order-2 lg:order-1">
+          <h3 class="font-display font-semibold mb-6 text-(--color-accent) text-sm uppercase tracking-wider">How It Works</h3>
+          <div class="space-y-5">
+            {services[1].steps.map((s, i) => (
+              <div class="flex gap-4 items-start">
+                <span class="text-xs font-bold font-mono text-(--color-accent) bg-(--color-teal-glow) border border-(--color-teal-edge) rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">{i + 1}</span>
+                <div>
+                  <div class="text-sm font-semibold text-(--color-fg) mb-1">{s.label}</div>
+                  <div class="text-sm text-(--color-fg-muted)">{s.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="order-1 lg:order-2">
+          <span class="text-xs font-semibold tracking-widest uppercase text-(--color-accent) font-mono mb-5 block">Certificate Lifecycle</span>
+          <h2 class="font-display text-3xl md:text-4xl font-bold mb-6 tracking-tight leading-tight">
+            Certificate Lifecycle Management
+          </h2>
+          <p class="text-(--color-fg-muted) mb-8 leading-relaxed">
+            Automate certificate discovery, enrollment, renewal, and alerting across your entire estate. Eliminate manual tracking and expired certificate incidents with ACME, EST, and SCEP workflows integrated into your existing toolchain.
+          </p>
+          <!-- Outcome box -->
+          <div class="border-l-2 border-(--color-accent) pl-4 py-3 rounded-r-lg" style="background: rgba(14,165,233,0.07);">
+            <span class="text-xs font-semibold uppercase tracking-wider text-(--color-accent) block mb-1">Outcome</span>
+            <p class="text-sm font-semibold text-(--color-accent)">→ {services[1].outcome}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. DORA, NIS2 & EU Regulatory Compliance -->
+  <section id="compliance" class="py-24" style="background: var(--color-bg);">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-start">
+        <div>
+          <span class="text-xs font-semibold tracking-widest uppercase text-(--color-accent) font-mono mb-5 block">Regulatory Compliance</span>
+          <h2 class="font-display text-3xl md:text-4xl font-bold mb-6 tracking-tight leading-tight">
+            DORA, NIS2 & EU Regulatory Compliance
+          </h2>
+          <p class="text-(--color-fg-muted) mb-8 leading-relaxed">
+            Compliance advisory for financial institutions and regulated enterprises navigating DORA, NIS2, and eIDAS 2.0. Gap analysis, control mapping, RFP drafting for PKI and KMS solutions, and threat modeling for cloud PKI environments.
+          </p>
+          <!-- Outcome box -->
+          <div class="border-l-2 border-(--color-accent) pl-4 py-3 rounded-r-lg" style="background: rgba(14,165,233,0.07);">
+            <span class="text-xs font-semibold uppercase tracking-wider text-(--color-accent) block mb-1">Outcome</span>
+            <p class="text-sm font-semibold text-(--color-accent)">→ {services[2].outcome}</p>
+          </div>
+        </div>
+
+        <!-- Coverage areas card -->
+        <div class="relative bg-(--color-surface) rounded-xl p-8 border border-(--color-border) card-accent overflow-hidden card-hover">
+          <h3 class="font-display font-semibold mb-6 text-(--color-gold) text-sm uppercase tracking-wider">Coverage Areas</h3>
+          <div class="space-y-3">
+            {services[2].areas.map(a => (
+              <div class="flex items-center gap-3 text-sm text-(--color-fg-2)">
+                <span class="w-1.5 h-1.5 rounded-full bg-(--color-accent) flex-shrink-0"></span>
+                {a}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Post-Quantum Cryptography Readiness -->
+  <section id="pqc" class="py-24" style="background: var(--color-bg-alt);">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-start">
+        <!-- Phases card (left) -->
+        <div class="relative bg-(--color-surface) rounded-xl p-8 border border-(--color-border) card-accent overflow-hidden card-hover order-2 lg:order-1">
+          <h3 class="font-display font-semibold mb-6 text-(--color-accent) text-sm uppercase tracking-wider">Migration Roadmap</h3>
+          <div class="space-y-5">
+            {services[3].phases.map(p => (
+              <div class="flex gap-4 items-start">
+                <span class="text-xs font-bold font-mono text-(--color-accent) bg-(--color-teal-glow) border border-(--color-teal-edge) rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">{p.phase}</span>
+                <div>
+                  <div class="text-sm font-semibold text-(--color-fg) mb-1">{p.title}</div>
+                  <div class="text-sm text-(--color-fg-muted)">{p.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="order-1 lg:order-2">
+          <span class="text-xs font-semibold tracking-widest uppercase text-(--color-accent) font-mono mb-5 block">Post-Quantum Readiness</span>
+          <h2 class="font-display text-3xl md:text-4xl font-bold mb-6 tracking-tight leading-tight">
+            Post-Quantum Cryptography Readiness
+          </h2>
+          <p class="text-(--color-fg-muted) mb-8 leading-relaxed">
+            Prepare your cryptographic infrastructure for the post-quantum transition before it becomes a compliance requirement. Crypto-asset inventory, FIPS 203/204/205 migration planning (ML-DSA, ML-KEM), crypto-agility assessment, and hybrid certificate strategies.
+          </p>
+          <!-- Outcome box -->
+          <div class="border-l-2 border-(--color-accent) pl-4 py-3 rounded-r-lg" style="background: rgba(14,165,233,0.07);">
+            <span class="text-xs font-semibold uppercase tracking-wider text-(--color-accent) block mb-1">Outcome</span>
+            <p class="text-sm font-semibold text-(--color-accent)">→ {services[3].outcome}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. IoT & Device Certificate Security -->
+  <section id="iot" class="py-24" style="background: var(--color-bg);">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-start">
+        <div>
+          <span class="text-xs font-semibold tracking-widest uppercase text-(--color-accent) font-mono mb-5 block">IoT & Device Security</span>
+          <h2 class="font-display text-3xl md:text-4xl font-bold mb-6 tracking-tight leading-tight">
+            IoT & Device Certificate Security
+          </h2>
+          <p class="text-(--color-fg-muted) mb-8 leading-relaxed">
+            Secure device authentication and firmware integrity for connected environments. SCEP/Intune/EAP-TLS device onboarding, Code Signing CA centralization, OT/ICS PKI, and connected vehicle certificate architectures using AWS PCA with SCEP.
+          </p>
+          <!-- Outcome box -->
+          <div class="border-l-2 border-(--color-accent) pl-4 py-3 rounded-r-lg" style="background: rgba(14,165,233,0.07);">
+            <span class="text-xs font-semibold uppercase tracking-wider text-(--color-accent) block mb-1">Outcome</span>
+            <p class="text-sm font-semibold text-(--color-accent)">→ {services[4].outcome}</p>
+          </div>
+        </div>
+
+        <!-- Use cases card -->
+        <div class="relative bg-(--color-surface) rounded-xl p-8 border border-(--color-border) card-accent overflow-hidden card-hover">
+          <h3 class="font-display font-semibold mb-6 text-(--color-gold) text-sm uppercase tracking-wider">Use Cases</h3>
+          <div class="space-y-6">
+            {services[4].usecases.map(u => (
+              <div class="flex gap-4 items-start">
+                <span class="text-2xl flex-shrink-0">{u.icon}</span>
+                <div>
+                  <div class="text-sm font-semibold text-(--color-fg) mb-1">{u.title}</div>
+                  <div class="text-sm text-(--color-fg-muted)">{u.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Security Assessment & Penetration Testing -->
+  <section id="pentest" class="py-24" style="background: var(--color-bg-alt);">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-start">
+        <!-- Check grid card (left) -->
+        <div class="relative bg-(--color-surface) rounded-xl p-8 border border-(--color-border) card-accent overflow-hidden card-hover order-2 lg:order-1">
+          <h3 class="font-display font-semibold mb-6 text-(--color-accent) text-sm uppercase tracking-wider">What I Check</h3>
+          <div class="grid grid-cols-2 gap-3">
+            {services[5].checks.map(c => (
+              <div class="text-sm text-(--color-fg-2) rounded-lg p-3 flex items-center gap-2" style="background: rgba(0,0,0,0.2);">
+                <span class="w-1 h-1 rounded-full bg-(--color-accent) flex-shrink-0"></span>
+                {c}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="order-1 lg:order-2">
+          <span class="text-xs font-semibold tracking-widest uppercase text-(--color-accent) font-mono mb-5 block">Security Assessment</span>
+          <h2 class="font-display text-3xl md:text-4xl font-bold mb-6 tracking-tight leading-tight">
+            Find What's Broken Before Attackers Do
+          </h2>
+          <p class="text-(--color-fg-muted) mb-8 leading-relaxed">
+            Comprehensive vulnerability assessment and penetration testing. OSINT reconnaissance, network scanning, web application testing, and detailed remediation reports with findings ranked by business risk.
+          </p>
+          <!-- Outcome box -->
+          <div class="border-l-2 border-(--color-accent) pl-4 py-3 rounded-r-lg" style="background: rgba(14,165,233,0.07);">
+            <span class="text-xs font-semibold uppercase tracking-wider text-(--color-accent) block mb-1">Outcome</span>
+            <p class="text-sm font-semibold text-(--color-accent)">→ {services[5].outcome}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- All Services at a Glance -->
+  <section class="py-24" style="background: var(--color-bg);">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <h2 class="font-display text-2xl md:text-3xl font-bold mb-4 tracking-tight">All Services at a Glance</h2>
+        <p class="text-(--color-fg-muted)">Six disciplines. One senior engineer. Brussels &amp; Tokyo.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {services.map(svc => (
+          <article class="relative bg-(--color-surface) border border-(--color-border) rounded-xl p-8 overflow-hidden card-accent card-hover">
+            <!-- Icon tile -->
+            <div class="w-12 h-12 rounded-[10px] border border-(--color-border) flex items-center justify-center mb-5 text-(--color-accent)" style="background: var(--color-teal-glow);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={svc.icon}></svg>
+            </div>
+            <div class="text-xs font-semibold uppercase tracking-widest text-(--color-accent) mb-2">{svc.label}</div>
+            <h3 class="font-display text-lg font-bold mb-3 text-(--color-fg)">{svc.title}</h3>
+            <p class="text-sm leading-relaxed text-(--color-fg-muted) mb-5">{svc.body}</p>
+            <!-- Outcome -->
+            <div class="border-l-2 border-(--color-accent) pl-3 py-2 rounded-r text-xs font-semibold text-(--color-accent)" style="background: rgba(14,165,233,0.07);">
+              → {svc.outcome}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA band -->
+  <section class="py-24 mesh-gradient">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="relative bg-(--color-surface) border border-(--color-teal-edge) rounded-2xl p-16 overflow-hidden text-center">
+        <!-- Glow -->
+        <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse at 50% 100%, rgba(14,165,233,0.12) 0%, transparent 60%);"></div>
+        <div class="relative">
+          <span class="inline-block text-xs font-semibold tracking-widest uppercase text-(--color-accent) bg-(--color-teal-glow) border border-(--color-teal-edge) rounded-full px-4 py-1 mb-6">Ready to start?</span>
+          <h2 class="font-display text-3xl md:text-4xl font-bold mb-5 tracking-tight">
+            Let's talk about your PKI estate.
+          </h2>
+          <p class="text-(--color-fg-muted) text-base leading-relaxed mb-8 max-w-lg mx-auto">
+            30-minute discovery call — senior-to-senior. No sales deck, no demos, no junior account manager.
+          </p>
+          <a href="/contact" class="inline-flex items-center gap-2 px-8 py-4 bg-(--color-accent) text-white rounded-lg font-semibold font-display hover:bg-(--color-accent-hover) transition-all btn-glow">
+            Get in Touch →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>

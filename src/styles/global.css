@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+@theme {
+  /* Navy palette — dark-first brand */
+  --color-bg: #0B1526;
+  --color-bg-alt: #112240;
+  --color-bg-deep: #080F1C;
+  --color-surface: #112240;
+  --color-surface-hi: #142a4d;
+  --color-border: #1E3A5F;
+  --color-border-strong: rgba(14,165,233,0.25);
+
+  /* Text stack */
+  --color-fg: #F1F5F9;
+  --color-fg-2: #CBD5E1;
+  --color-fg-muted: #94A3B8;
+  --color-fg-faint: #64748B;
+
+  /* Accents */
+  --color-accent: #0EA5E9;
+  --color-accent-hover: #0369A1;
+  --color-accent-light: #38BDF8;
+  --color-teal-glow: rgba(14,165,233,0.10);
+  --color-teal-edge: rgba(14,165,233,0.25);
+
+  /* Trust gold — credentials only */
+  --color-gold: #F59E0B;
+  --color-gold-bg: rgba(245,158,11,0.12);
+  --color-gold-edge: rgba(245,158,11,0.35);
+
+  /* Semantic / ops */
+  --color-red: #EF4444;
+  --color-green: #22C55E;
+  --color-violet: #7C3AED;
+
+  /* Legacy compat aliases */
+  --color-dark: #112240;
+  --color-darker: #0B1526;
+  --color-light: #F1F5F9;
+  --color-muted: #94A3B8;
+  --color-card: #112240;
+  --color-emerald: #22C55E;
+  --color-cyber: #0EA5E9;
+
+  /* Typography */
+  --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mkpPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.7); opacity: 0.5; }
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.fade-in-delay-1 { animation-delay: 100ms; }
+.fade-in-delay-2 { animation-delay: 200ms; }
+.fade-in-delay-3 { animation-delay: 300ms; }
+.fade-in-delay-4 { animation-delay: 400ms; }
+
+/* Card hover */
+.card-hover {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-teal-edge);
+  box-shadow: 0 0 40px rgba(14,165,233,0.08);
+}
+
+/* Glow on primary buttons */
+.btn-glow {
+  box-shadow: 0 0 20px rgba(14,165,233,0.15);
+  transition: all 0.2s;
+}
+.btn-glow:hover {
+  box-shadow: 0 8px 30px rgba(14,165,233,0.25);
+  transform: translateY(-1px);
+}
+
+/* Top accent bar on cards */
+.card-accent::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), transparent);
+}
+
+/* Mesh gradient background for section headers */
+.mesh-gradient {
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 60%, rgba(14,165,233,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 30%, rgba(245,158,11,0.04) 0%, transparent 55%),
+    var(--color-bg-deep);
+}
+
+/* Grid background for hero */
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(30,58,95,0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30,58,95,0.4) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 50% 40%, #000 30%, transparent 75%);
+  opacity: 0.5;
+}
+
+/* Hero glow */
+.hero-glow {
+  background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(14,165,233,0.07) 0%, transparent 70%);
+}
+
+/* Eyebrow pill */
+.eye-pill {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background: var(--color-teal-glow);
+  border: 1px solid var(--color-teal-edge);
+  border-radius: 100px;
+  padding: 4px 14px;
+}
+
+/* Font family utilities */
+.font-heading {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+.font-body {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+.font-mono-custom {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+::selection {
+  background: rgba(14,165,233,0.25);
+  color: var(--color-fg);
+}

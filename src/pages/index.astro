@@ -1,0 +1,395 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="PKI Consulting Brussels">
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="relative overflow-hidden border-b border-(--color-border)" style="padding: 120px 0 96px;">
+    <div class="absolute inset-0 hero-grid" aria-hidden="true"></div>
+    <div class="absolute inset-0 hero-glow" aria-hidden="true"></div>
+    <div class="relative max-w-[1100px] mx-auto px-6">
+      <!-- Badge row -->
+      <div class="flex flex-wrap gap-2.5 mb-7">
+        <span class="text-[12px] font-semibold px-3.5 py-1.5 rounded-full" style="background: var(--color-gold-bg); border: 1px solid var(--color-gold-edge); color: var(--color-gold);">✦ CISSP Certified</span>
+        <span class="text-[12px] font-semibold px-3.5 py-1.5 rounded-full" style="background: var(--color-teal-glow); border: 1px solid var(--color-teal-edge); color: var(--color-accent);">6+ Years PKI Engineering</span>
+        <span class="text-[12px] font-semibold px-3.5 py-1.5 rounded-full" style="background: rgba(148,163,184,0.08); border: 1px solid rgba(148,163,184,0.2); color: var(--color-fg-muted);">📍 Brussels, Belgium</span>
+      </div>
+      <!-- Headline -->
+      <h1 class="font-heading font-[800] leading-[1.08] mb-6" style="font-size: clamp(40px, 6vw, 68px); letter-spacing: -0.03em;">
+        Your certificates.<br/>
+        <em class="not-italic text-(--color-accent)">Secured. Automated.</em><br/>
+        Compliant by design.
+      </h1>
+      <!-- Subtitle -->
+      <p class="text-[19px] text-(--color-fg-2) leading-relaxed max-w-[720px] mb-9">
+        Brussels-based PKI boutique helping <strong class="text-(--color-fg) font-medium">banks, financial institutions, and smart-city operators</strong> design, deploy, and automate enterprise PKI — fully aligned with DORA, NIS2, and eIDAS 2.0.
+      </p>
+      <!-- CTAs -->
+      <div class="flex flex-wrap gap-3.5 mb-10">
+        <a href="#contact" class="inline-flex items-center px-8 py-4 bg-(--color-accent) text-white rounded-lg font-heading font-semibold text-[15px] no-underline btn-glow">
+          Book a Free Discovery Call →
+        </a>
+        <a href="#services" class="inline-flex items-center px-8 py-4 rounded-lg font-heading font-semibold text-[15px] text-(--color-accent) no-underline transition-all" style="border: 1.5px solid var(--color-accent);">
+          Explore Services
+        </a>
+      </div>
+      <!-- Status dot -->
+      <div class="inline-flex items-center gap-2 text-[13px] text-(--color-fg-muted) font-mono-custom">
+        <span class="w-2 h-2 rounded-full bg-(--color-green)" style="box-shadow: 0 0 8px var(--color-green); animation: mkpPulse 2s infinite;"></span>
+        Available for engagements · Q2 2026
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CREDIBILITY STRIP ═══════════ -->
+  <section class="bg-(--color-surface)">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4" style="gap: 2px; background: var(--color-border); border: 1px solid var(--color-border); border-radius: 0; overflow: hidden;">
+        <div class="bg-(--color-surface) py-7 px-5 text-center">
+          <div class="font-heading font-[800] text-[36px] text-(--color-accent) mb-1" style="letter-spacing: -0.02em;">6+</div>
+          <div class="text-[12px] text-(--color-fg-muted) uppercase tracking-wider font-medium">Years PKI engineering</div>
+        </div>
+        <div class="bg-(--color-surface) py-7 px-5 text-center">
+          <div class="font-heading font-[800] text-[36px] text-(--color-accent) mb-1" style="letter-spacing: -0.02em;">100%</div>
+          <div class="text-[12px] text-(--color-fg-muted) uppercase tracking-wider font-medium">Senior-only delivery</div>
+        </div>
+        <div class="bg-(--color-surface) py-7 px-5 text-center">
+          <div class="font-heading font-[800] text-[36px] text-(--color-accent) mb-1" style="letter-spacing: -0.02em;">€18k</div>
+          <div class="text-[12px] text-(--color-fg-muted) uppercase tracking-wider font-medium">Fixed-price assessments</div>
+        </div>
+        <div class="bg-(--color-surface) py-7 px-5 text-center">
+          <div class="font-heading font-[800] text-[36px] text-(--color-accent) mb-1" style="letter-spacing: -0.02em;">0</div>
+          <div class="text-[12px] text-(--color-fg-muted) uppercase tracking-wider font-medium">Juniors on your project</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ WHY THIS MATTERS NOW ═══════════ -->
+  <section class="py-24" id="why">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <span class="eye-pill mb-4 block w-fit">Why this matters now</span>
+      <h2 class="font-heading font-bold mb-4" style="font-size: clamp(28px, 4vw, 42px); letter-spacing: -0.02em;">
+        Regulators stopped looking away.
+      </h2>
+      <p class="text-[18px] text-(--color-fg-muted) max-w-[620px] leading-relaxed mb-12">
+        PKI is invisible — until it isn't. Expired certificates take down production. Misconfigured CAs fail audits. Four forces are converging.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- DORA -->
+        <div class="bg-(--color-surface) border border-(--color-border) rounded-xl p-7 card-hover">
+          <div class="inline-block font-mono-custom text-[11px] font-medium text-(--color-accent) px-2.5 py-1 rounded mb-4" style="background: var(--color-teal-glow); letter-spacing: 0.06em;">DORA</div>
+          <h3 class="text-[16px] font-bold mb-2.5 leading-tight">Operational resilience, now enforceable</h3>
+          <p class="text-[13px] text-(--color-fg-2) leading-relaxed">Cryptographic controls are an explicit pillar of DORA. Register, audit, remediate — on schedule.</p>
+        </div>
+        <!-- NIS2 -->
+        <div class="bg-(--color-surface) border border-(--color-border) rounded-xl p-7 card-hover">
+          <div class="inline-block font-mono-custom text-[11px] font-medium text-(--color-accent) px-2.5 py-1 rounded mb-4" style="background: var(--color-teal-glow); letter-spacing: 0.06em;">NIS2</div>
+          <h3 class="text-[16px] font-bold mb-2.5 leading-tight">Expanded scope, personal liability</h3>
+          <p class="text-[13px] text-(--color-fg-2) leading-relaxed">Boards can be personally liable. PKI hygiene is no longer an IT back-office concern.</p>
+        </div>
+        <!-- eIDAS -->
+        <div class="bg-(--color-surface) border border-(--color-border) rounded-xl p-7 card-hover">
+          <div class="inline-block font-mono-custom text-[11px] font-medium text-(--color-accent) px-2.5 py-1 rounded mb-4" style="background: var(--color-teal-glow); letter-spacing: 0.06em;">eIDAS 2.0</div>
+          <h3 class="text-[16px] font-bold mb-2.5 leading-tight">QWACs, QSealCs, and wallets</h3>
+          <p class="text-[13px] text-(--color-fg-2) leading-relaxed">New qualified trust services require conformance against ETSI EN 319-series norms.</p>
+        </div>
+        <!-- Post-Quantum -->
+        <div class="bg-(--color-surface) border border-(--color-border) rounded-xl p-7 card-hover">
+          <div class="inline-block font-mono-custom text-[11px] font-medium text-(--color-accent) px-2.5 py-1 rounded mb-4" style="background: var(--color-teal-glow); letter-spacing: 0.06em;">Post-Quantum</div>
+          <h3 class="text-[16px] font-bold mb-2.5 leading-tight">A two-decade migration has begun</h3>
+          <p class="text-[13px] text-(--color-fg-2) leading-relaxed">Crypto-agility is the new hygiene. Inventory, prioritise, and pilot ML-KEM / ML-DSA early.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SERVICES ═══════════ -->
+  <section class="py-24 bg-(--color-surface)" id="services">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <span class="eye-pill mb-4 block w-fit">Services</span>
+      <h2 class="font-heading font-bold mb-4" style="font-size: clamp(28px, 4vw, 42px); letter-spacing: -0.02em;">
+        Six engagement types. Senior-only delivery.
+      </h2>
+      <p class="text-[18px] text-(--color-fg-muted) max-w-[620px] leading-relaxed mb-12">
+        Scoped, fixed-price where we can — time &amp; materials where scope genuinely moves. No junior account manager between you and the work.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <!-- PKI Architecture -->
+        <article class="relative bg-(--color-bg) border border-(--color-border) rounded-xl p-8 overflow-hidden card-hover card-accent">
+          <div class="w-12 h-12 rounded-[10px] flex items-center justify-center text-(--color-accent) mb-5" style="background: var(--color-teal-glow); border: 1px solid var(--color-border);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3 L3 8 L12 13 L21 8 Z"/><path d="M3 16 L12 21 L21 16"/><path d="M3 12 L12 17 L21 12"/>
+            </svg>
+          </div>
+          <h3 class="font-heading text-[18px] font-bold mb-2.5">PKI Architecture &amp; Design</h3>
+          <p class="text-[14px] text-(--color-fg-2) leading-relaxed mb-4">End-to-end design of a production-grade PKI hierarchy: trust anchor, CA policies, HSM integration, CP/CPS drafting.</p>
+          <div class="text-[13px] font-semibold text-(--color-accent) py-3 px-3.5 rounded-r-md" style="background: rgba(14,165,233,0.07); border-left: 2px solid var(--color-accent);">
+            → Architecture doc, HSM sizing, CP/CPS draft
+          </div>
+        </article>
+
+        <!-- DORA Gap Assessment -->
+        <article class="relative bg-(--color-bg) border border-(--color-border) rounded-xl p-8 overflow-hidden card-hover card-accent">
+          <div class="w-12 h-12 rounded-[10px] flex items-center justify-center text-(--color-accent) mb-5" style="background: var(--color-teal-glow); border: 1px solid var(--color-border);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 11l3 3 6-6"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/>
+            </svg>
+          </div>
+          <h3 class="font-heading text-[18px] font-bold mb-2.5">DORA Gap Assessment</h3>
+          <p class="text-[14px] text-(--color-fg-2) leading-relaxed mb-4">Structured review of cryptographic controls against DORA ICT risk requirements. Register, map, remediate.</p>
+          <div class="text-[13px] font-semibold text-(--color-accent) py-3 px-3.5 rounded-r-md" style="background: rgba(14,165,233,0.07); border-left: 2px solid var(--color-accent);">
+            → Gap register + remediation roadmap
+          </div>
+        </article>
+
+        <!-- EJBCA / ADCS Deployment -->
+        <article class="relative bg-(--color-bg) border border-(--color-border) rounded-xl p-8 overflow-hidden card-hover card-accent">
+          <div class="w-12 h-12 rounded-[10px] flex items-center justify-center text-(--color-accent) mb-5" style="background: var(--color-teal-glow); border: 1px solid var(--color-border);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="6" rx="1"/><rect x="3" y="14" width="18" height="6" rx="1"/><path d="M7 7h.01M7 17h.01M11 7h4M11 17h4"/>
+            </svg>
+          </div>
+          <h3 class="font-heading text-[18px] font-bold mb-2.5">EJBCA / ADCS Deployment</h3>
+          <p class="text-[14px] text-(--color-fg-2) leading-relaxed mb-4">Hands-on installation and hardening — Enterprise Java Beans CA, Microsoft ADCS, HashiCorp Vault.</p>
+          <div class="text-[13px] font-semibold text-(--color-accent) py-3 px-3.5 rounded-r-md" style="background: rgba(14,165,233,0.07); border-left: 2px solid var(--color-accent);">
+            → Running, hardened, documented PKI
+          </div>
+        </article>
+
+        <!-- Certificate Lifecycle Automation -->
+        <article class="relative bg-(--color-bg) border border-(--color-border) rounded-xl p-8 overflow-hidden card-hover card-accent">
+          <div class="w-12 h-12 rounded-[10px] flex items-center justify-center text-(--color-accent) mb-5" style="background: var(--color-teal-glow); border: 1px solid var(--color-border);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+          </div>
+          <h3 class="font-heading text-[18px] font-bold mb-2.5">Certificate Lifecycle Automation</h3>
+          <p class="text-[14px] text-(--color-fg-2) leading-relaxed mb-4">ACME, EST, SCEP, cert-manager, Venafi integration. No more expired certs taking down production.</p>
+          <div class="text-[13px] font-semibold text-(--color-accent) py-3 px-3.5 rounded-r-md" style="background: rgba(14,165,233,0.07); border-left: 2px solid var(--color-accent);">
+            → Automated issuance + renewal pipeline
+          </div>
+        </article>
+
+        <!-- PKI Incident Response -->
+        <article class="relative bg-(--color-bg) border border-(--color-border) rounded-xl p-8 overflow-hidden card-hover card-accent">
+          <div class="w-12 h-12 rounded-[10px] flex items-center justify-center text-(--color-accent) mb-5" style="background: var(--color-teal-glow); border: 1px solid var(--color-border);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2l10 18H2L12 2z"/><path d="M12 9v4"/><path d="M12 17h.01"/>
+            </svg>
+          </div>
+          <h3 class="font-heading text-[18px] font-bold mb-2.5">PKI Incident Response</h3>
+          <p class="text-[14px] text-(--color-fg-2) leading-relaxed mb-4">Private-key compromise, CA migration, revocation storms — 24h senior on-call during the bleed.</p>
+          <div class="text-[13px] font-semibold text-(--color-accent) py-3 px-3.5 rounded-r-md" style="background: rgba(14,165,233,0.07); border-left: 2px solid var(--color-accent);">
+            → Contained incident + post-mortem
+          </div>
+        </article>
+
+        <!-- Technical Training -->
+        <article class="relative bg-(--color-bg) border border-(--color-border) rounded-xl p-8 overflow-hidden card-hover card-accent">
+          <div class="w-12 h-12 rounded-[10px] flex items-center justify-center text-(--color-accent) mb-5" style="background: var(--color-teal-glow); border: 1px solid var(--color-border);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 10l10-6 10 6-10 6-10-6z"/><path d="M6 13v5c0 1 3 3 6 3s6-2 6-3v-5"/>
+            </svg>
+          </div>
+          <h3 class="font-heading text-[18px] font-bold mb-2.5">Technical Training</h3>
+          <p class="text-[14px] text-(--color-fg-2) leading-relaxed mb-4">On-site or remote workshops for your engineering, ops, and compliance teams. No slides — live labs.</p>
+          <div class="text-[13px] font-semibold text-(--color-accent) py-3 px-3.5 rounded-r-md" style="background: rgba(14,165,233,0.07); border-left: 2px solid var(--color-accent);">
+            → Certified, confident PKI operators
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ABOUT ═══════════ -->
+  <section class="py-24" id="about">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-[340px_1fr] gap-14 items-start">
+        <!-- Photo placeholder -->
+        <div class="bg-(--color-surface) border border-(--color-border) rounded-xl flex items-center justify-center overflow-hidden" style="aspect-ratio: 3/4;">
+          <div class="text-center">
+            <div class="font-heading font-[800] text-[96px] text-(--color-accent) opacity-50" style="letter-spacing: -0.04em;">IZ</div>
+            <div class="text-[12px] text-(--color-fg-muted) font-mono-custom">Ismail Zemouri, CISSP</div>
+          </div>
+        </div>
+        <!-- Bio -->
+        <div>
+          <span class="eye-pill mb-4 block w-fit">About</span>
+          <h2 class="font-heading font-bold mb-5" style="font-size: clamp(28px, 3.5vw, 40px); letter-spacing: -0.02em; line-height: 1.15;">
+            Senior expertise. Zero juniors. No fluff.
+          </h2>
+          <p class="text-[15px] text-(--color-fg-2) leading-relaxed mb-3.5">
+            MYKEYPAIR is led by <strong class="text-(--color-fg) font-medium">Ismail Zemouri, CISSP</strong> — 6+ years of hands-on PKI engineering across EU banks, financial market infrastructure, and critical utilities. Previous engagements with leading EU banks, a major central bank, critical infrastructure operators, and a global automotive group.
+          </p>
+          <p class="text-[15px] text-(--color-fg-2) leading-relaxed mb-5">
+            Vendor-agnostic. EJBCA, Microsoft ADCS, HashiCorp Vault, enterprise HSMs, AWS CloudHSM — the tool follows the architecture, not the other way around.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-5">
+            <span class="text-[12px] font-medium text-(--color-fg-2) font-mono-custom px-3 py-1.5 rounded-md" style="background: var(--color-bg-deep); border: 1px solid var(--color-border);">CISSP</span>
+            <span class="text-[12px] font-medium text-(--color-fg-2) font-mono-custom px-3 py-1.5 rounded-md" style="background: var(--color-bg-deep); border: 1px solid var(--color-border);">ETSI EN 319</span>
+            <span class="text-[12px] font-medium text-(--color-fg-2) font-mono-custom px-3 py-1.5 rounded-md" style="background: var(--color-bg-deep); border: 1px solid var(--color-border);">EJBCA PKI CA</span>
+            <span class="text-[12px] font-medium text-(--color-fg-2) font-mono-custom px-3 py-1.5 rounded-md" style="background: var(--color-bg-deep); border: 1px solid var(--color-border);">HSM integration</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PRICING ═══════════ -->
+  <section class="py-24" id="pricing">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <span class="eye-pill mb-4 block w-fit">Pricing</span>
+      <h2 class="font-heading font-bold mb-4" style="font-size: clamp(28px, 4vw, 42px); letter-spacing: -0.02em;">
+        Three ways to work with us.
+      </h2>
+      <p class="text-[18px] text-(--color-fg-muted) max-w-[620px] leading-relaxed mb-12">
+        All prices exclude 21% VAT. EU reverse charge applies for B2B outside Belgium.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+        <!-- Discovery -->
+        <article class="relative bg-(--color-surface) border border-(--color-border) rounded-2xl p-8 flex flex-col overflow-hidden card-accent">
+          <div class="text-[13px] font-semibold text-(--color-accent) uppercase tracking-wider mb-3">Discovery</div>
+          <div class="flex items-baseline gap-1.5 mb-3">
+            <span class="font-heading font-[800] text-[40px] text-(--color-fg)" style="letter-spacing: -0.02em;">Free</span>
+            <span class="text-[14px] text-(--color-fg-muted)">· 30 min</span>
+          </div>
+          <p class="text-[14px] text-(--color-fg-2) leading-relaxed mb-6">Scoping call. Senior-to-senior. No sales deck.</p>
+          <ul class="space-y-2.5 mb-7 flex-1">
+            <li class="flex gap-2.5 items-start text-[14px] text-(--color-fg-2)">
+              <svg class="mt-0.5 shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Your PKI estate, reviewed
+            </li>
+            <li class="flex gap-2.5 items-start text-[14px] text-(--color-fg-2)">
+              <svg class="mt-0.5 shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Regulatory exposure
+            </li>
+            <li class="flex gap-2.5 items-start text-[14px] text-(--color-fg-2)">
+              <svg class="mt-0.5 shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Proposal within 48 h
+            </li>
+          </ul>
+          <a href="#contact" class="block text-center py-3 px-5 rounded-lg text-[14px] font-semibold text-(--color-accent) no-underline transition-all" style="border: 1.5px solid var(--color-accent);">
+            Book call →
+          </a>
+        </article>
+
+        <!-- Fixed Engagement (highlighted) -->
+        <article class="relative bg-(--color-surface) rounded-2xl p-8 flex flex-col overflow-hidden card-accent" style="border: 1px solid var(--color-teal-edge); box-shadow: 0 0 60px rgba(14,165,233,0.08);">
+          <div class="absolute top-3.5 right-3.5 bg-(--color-accent) text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">Most popular</div>
+          <div class="text-[13px] font-semibold text-(--color-accent) uppercase tracking-wider mb-3">Fixed Engagement</div>
+          <div class="flex items-baseline gap-1.5 mb-3">
+            <span class="font-heading font-[800] text-[40px] text-(--color-fg)" style="letter-spacing: -0.02em;">€18,000</span>
+            <span class="text-[14px] text-(--color-fg-muted)">· from</span>
+          </div>
+          <p class="text-[14px] text-(--color-fg-2) leading-relaxed mb-6">Architecture, gap assessment, or deployment — scoped, fixed.</p>
+          <ul class="space-y-2.5 mb-7 flex-1">
+            <li class="flex gap-2.5 items-start text-[14px] text-(--color-fg-2)">
+              <svg class="mt-0.5 shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Scoped SOW
+            </li>
+            <li class="flex gap-2.5 items-start text-[14px] text-(--color-fg-2)">
+              <svg class="mt-0.5 shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Defined deliverable
+            </li>
+            <li class="flex gap-2.5 items-start text-[14px] text-(--color-fg-2)">
+              <svg class="mt-0.5 shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              CISSP-led, senior-only
+            </li>
+            <li class="flex gap-2.5 items-start text-[14px] text-(--color-fg-2)">
+              <svg class="mt-0.5 shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Written report + handover
+            </li>
+          </ul>
+          <a href="#contact" class="block text-center py-3 px-5 bg-(--color-accent) text-white rounded-lg text-[14px] font-semibold no-underline">
+            Request a proposal →
+          </a>
+        </article>
+
+        <!-- Retainer -->
+        <article class="relative bg-(--color-surface) border border-(--color-border) rounded-2xl p-8 flex flex-col overflow-hidden card-accent">
+          <div class="text-[13px] font-semibold text-(--color-accent) uppercase tracking-wider mb-3">Retainer</div>
+          <div class="flex items-baseline gap-1.5 mb-3">
+            <span class="font-heading font-[800] text-[40px] text-(--color-fg)" style="letter-spacing: -0.02em;">€12,500</span>
+            <span class="text-[14px] text-(--color-fg-muted)">/ month</span>
+          </div>
+          <p class="text-[14px] text-(--color-fg-2) leading-relaxed mb-6">Senior PKI on-call for your team. Cap 10 days/month.</p>
+          <ul class="space-y-2.5 mb-7 flex-1">
+            <li class="flex gap-2.5 items-start text-[14px] text-(--color-fg-2)">
+              <svg class="mt-0.5 shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Named senior engineer
+            </li>
+            <li class="flex gap-2.5 items-start text-[14px] text-(--color-fg-2)">
+              <svg class="mt-0.5 shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              10 day/month cap
+            </li>
+            <li class="flex gap-2.5 items-start text-[14px] text-(--color-fg-2)">
+              <svg class="mt-0.5 shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              24 h response SLA
+            </li>
+            <li class="flex gap-2.5 items-start text-[14px] text-(--color-fg-2)">
+              <svg class="mt-0.5 shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Quarterly review
+            </li>
+          </ul>
+          <a href="#contact" class="block text-center py-3 px-5 rounded-lg text-[14px] font-semibold text-(--color-accent) no-underline transition-all" style="border: 1.5px solid var(--color-accent);">
+            Discuss retainer →
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CONTACT CTA ═══════════ -->
+  <section class="py-24" id="contact">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <div class="relative bg-(--color-surface) rounded-2xl overflow-hidden text-center" style="border: 1px solid var(--color-teal-edge); padding: 64px 48px;">
+        <div class="absolute inset-0" style="background: radial-gradient(ellipse at 50% 100%, rgba(14,165,233,0.12) 0%, transparent 60%);"></div>
+        <div class="relative max-w-[620px] mx-auto">
+          <span class="eye-pill mb-5 inline-block">Ready to start?</span>
+          <h2 class="font-heading font-bold mb-3.5" style="font-size: clamp(28px, 4vw, 42px); letter-spacing: -0.02em; line-height: 1.15;">
+            Let's talk about your PKI estate.
+          </h2>
+          <p class="text-[16px] text-(--color-fg-2) leading-relaxed mb-7">
+            30-minute discovery call — senior-to-senior. No sales deck, no demos, no junior account manager.
+          </p>
+          <form id="cta-form" class="flex gap-2.5 max-w-[460px] mx-auto">
+            <input type="email" required placeholder="you@bank.eu"
+              class="flex-1 px-4.5 py-3.5 rounded-lg text-[15px] text-(--color-fg) font-body outline-none"
+              style="background: var(--color-bg); border: 1px solid var(--color-border);"
+            />
+            <button type="submit" class="px-6 py-3.5 bg-(--color-accent) text-white rounded-lg text-[14px] font-semibold font-body whitespace-nowrap cursor-pointer border-none">
+              Request call →
+            </button>
+          </form>
+          <div id="cta-ok" class="hidden text-(--color-green) text-[15px] py-3.5 px-4 rounded-lg max-w-[460px] mx-auto" style="background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.25);">
+            ✓ Thanks. We'll reply within 48 hours — from Brussels.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.getElementById('cta-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target as HTMLFormElement;
+      const email = (form.querySelector('input') as HTMLInputElement).value;
+      try {
+        await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, subject: 'Discovery Call Request', message: 'Requested via homepage CTA' }),
+        });
+      } catch {}
+      form.classList.add('hidden');
+      document.getElementById('cta-ok')?.classList.remove('hidden');
+    });
+  </script>
+
+</Layout>

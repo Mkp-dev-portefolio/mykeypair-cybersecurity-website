@@ -1,0 +1,68 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="DMARC p=none Is Dangerous" description="Why your email domain is probably spoofable and how to fix it in 5 minutes.">
+  <article class="py-20 bg-(--color-darker)">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="text-xs font-mono-custom px-3 py-1 rounded-full border border-(--color-cyber)/30 text-(--color-cyber)">Email Security</span>
+          <span class="text-xs text-(--color-muted)">5 min read · March 28, 2026</span>
+        </div>
+        <h1 class="font-heading text-4xl md:text-5xl font-bold leading-tight mb-6">Your DMARC Is Set to 'none'. Here's Why That's Dangerous.</h1>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-(--color-accent)/20 flex items-center justify-center"><span class="text-sm font-bold text-(--color-accent)">IZ</span></div>
+          <div><div class="text-sm font-medium">Ismail Zemouri</div><div class="text-xs text-(--color-muted)">CISSP · PKI Architect</div></div>
+        </div>
+      </div>
+
+      <div class="space-y-6 text-(--color-muted) leading-relaxed">
+        <p class="text-lg text-(--color-light)">During an OSINT assessment this week, I found a Belgian e-commerce company with email security so weak that anyone could send emails as their domain. The emails would land in recipients' inboxes — not spam. Inbox.</p>
+
+        <h2 class="font-heading text-2xl font-bold text-(--color-light) mt-12 mb-4">What I Found</h2>
+
+        <div class="bg-(--color-card) rounded-xl border border-white/10 overflow-hidden my-8">
+          <div class="flex items-center gap-2 px-4 py-3 bg-black/30 border-b border-white/5">
+            <div class="w-3 h-3 rounded-full bg-red-500/80"></div><div class="w-3 h-3 rounded-full bg-yellow-500/80"></div><div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+            <span class="text-xs text-(--color-muted) ml-2 font-mono-custom">DNS check</span>
+          </div>
+          <div class="p-6 font-mono-custom text-sm">
+            <p><span class="text-(--color-emerald)">$</span> dig _dmarc.target.be TXT +short</p>
+            <p class="text-(--color-accent) mt-1">"v=DMARC1; p=none"</p>
+            <p class="mt-3"><span class="text-(--color-emerald)">$</span> dig target.be TXT +short | grep spf</p>
+            <p class="text-(--color-accent) mt-1">"v=spf1 include:_spf.hostedemail.com <span class="text-red-400">~all</span>"</p>
+            <p class="mt-3"><span class="text-(--color-emerald)">$</span> dig default._domainkey.target.be TXT +short</p>
+            <p class="text-red-400 mt-1">(empty — no DKIM configured)</p>
+          </div>
+        </div>
+
+        <p>Three failures in one domain:</p>
+
+        <div class="bg-(--color-card) rounded-xl p-6 border border-white/10 my-8 space-y-4 text-sm">
+          <div class="flex items-start gap-3"><span class="text-red-400 text-lg">✗</span><div><strong class="text-(--color-light)">SPF: ~all (softfail)</strong> — spoofed emails get a "maybe suspicious" flag but still deliver. Should be <code class="bg-black/30 px-1 rounded">-all</code> (hardfail).</div></div>
+          <div class="flex items-start gap-3"><span class="text-red-400 text-lg">✗</span><div><strong class="text-(--color-light)">DMARC: p=none</strong> — tells receiving servers "don't do anything if SPF/DKIM fails." It's monitoring mode. No protection.</div></div>
+          <div class="flex items-start gap-3"><span class="text-red-400 text-lg">✗</span><div><strong class="text-(--color-light)">DKIM: not configured</strong> — no cryptographic signature on outgoing emails. No way to verify authenticity.</div></div>
+        </div>
+
+        <h2 class="font-heading text-2xl font-bold text-(--color-light) mt-12 mb-4">The Fix (5 Minutes)</h2>
+
+        <p><strong class="text-(--color-light)">1. SPF:</strong> Change <code class="bg-(--color-card) px-2 py-1 rounded text-xs">~all</code> to <code class="bg-(--color-card) px-2 py-1 rounded text-xs">-all</code></p>
+        <p><strong class="text-(--color-light)">2. DMARC:</strong> Add or change TXT record:</p>
+        <div class="bg-(--color-card) rounded-xl p-4 border border-white/10 font-mono-custom text-sm my-4">
+          <p>_dmarc.yourdomain.com TXT "v=DMARC1; p=reject; rua=mailto:dmarc@yourdomain.com"</p>
+        </div>
+        <p><strong class="text-(--color-light)">3. DKIM:</strong> Configure through your email provider. Most (Google Workspace, Microsoft 365) have a setup wizard.</p>
+
+        <p class="mt-6">Cost: <strong class="text-(--color-accent)">EUR 0</strong>. Time: <strong class="text-(--color-accent)">5 minutes</strong>. Protection: prevents brand impersonation, phishing, and invoice fraud.</p>
+
+        <h2 class="font-heading text-2xl font-bold text-(--color-light) mt-12 mb-4">Check Yours Now</h2>
+        <p>Go to <strong>mxtoolbox.com/dmarc.aspx</strong> and enter your domain. If you see <code class="bg-(--color-card) px-2 py-1 rounded text-xs">p=none</code> or no DMARC record at all, you're exposed.</p>
+
+        <p>Your domain reputation is an asset. Protect it like one.</p>
+      </div>
+
+      <div class="mt-16 pt-8 border-t border-white/5"><a href="/blog" class="text-(--color-accent) hover:text-(--color-accent-light) text-sm font-medium">&larr; Back to Blog</a></div>
+    </div>
+  </article>
+</Layout>

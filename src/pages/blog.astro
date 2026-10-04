@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const posts = [
+  {
+    title: "I Built a Full PKI in 48 Hours. Not to Ship It — to Understand It.",
+    date: "March 2026",
+    readTime: "8 min read",
+    excerpt: "EJBCA, Docker HA, mTLS, ACME, CRL, OCSP — the complete PKI stack deployed and documented in a weekend. Here's the architecture and what I learned.",
+    tag: "PKI",
+    accentColor: 'var(--color-accent)',
+    slug: "/blog/bank-grade-pki-48-hours"
+  },
+  {
+    title: "23 Vulnerabilities in One Server: A Real Pentest Story",
+    date: "March 2026",
+    readTime: "6 min read",
+    excerpt: "DNS zone transfer, exposed admin panels, EOL software with 90+ CVEs, anonymous FTP. How a single VPS became a security case study.",
+    tag: "Pentest",
+    accentColor: 'var(--color-accent)',
+    slug: "/blog/23-vulnerabilities-pentest"
+  },
+  {
+    title: "Your Linux Server Has a Lynis Score of 68. Here's How to Fix It.",
+    date: "March 2026",
+    readTime: "5 min read",
+    excerpt: "From default Ubuntu to hardened server: auditd, SSH restrictions, kernel tweaks, CIS benchmarks. 68 to 77 in 15 minutes.",
+    tag: "Hardening",
+    accentColor: 'var(--color-green)',
+    slug: "/blog/lynis-score-68-fix"
+  },
+  {
+    title: "mTLS Explained in 60 Seconds: Why Passwords Are Dead",
+    date: "March 2026",
+    readTime: "4 min read",
+    excerpt: "Mutual TLS authentication in practice. How I locked down every service with client certificates and eliminated password-based access.",
+    tag: "Zero Trust",
+    accentColor: 'var(--color-green)',
+    slug: "/blog/mtls-passwords-dead"
+  },
+  {
+    title: "Your DMARC Is Set to 'none'. Here's Why That's Dangerous.",
+    date: "March 2026",
+    readTime: "5 min read",
+    excerpt: "I checked a client's email security. No DKIM, SPF softfail, DMARC on 'none'. Anyone could send emails as their domain.",
+    tag: "Email Security",
+    accentColor: 'var(--color-accent)',
+    slug: "/blog/dmarc-none-dangerous"
+  },
+  {
+    title: "200+ SSH Brute-Force Attacks Per Day: What the Attackers Are Trying",
+    date: "March 2026",
+    readTime: "6 min read",
+    excerpt: "My VPS honeypot captures thousands of brute-force attempts daily. Here's who's attacking, from where, and the usernames they try.",
+    tag: "Threat Intel",
+    accentColor: 'var(--color-gold)',
+    slug: "/blog/ssh-attacks-per-day"
+  }
+];
+---
+
+<Layout title="Blog" description="Cybersecurity insights, PKI architecture, and real-world security stories">
+
+  <!-- Header -->
+  <section class="py-24 mesh-gradient">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <span class="inline-block text-xs font-semibold tracking-widest uppercase text-(--color-accent) bg-(--color-teal-glow) border border-(--color-teal-edge) rounded-full px-4 py-1 mb-6">
+        Blog
+      </span>
+      <h1 class="font-display text-4xl md:text-5xl font-bold mb-5 tracking-tight">
+        Real stories from real engagements.
+      </h1>
+      <p class="text-(--color-fg-muted) text-lg max-w-xl mx-auto">
+        No theory — just what works. Written from Brussels, for engineers who ship.
+      </p>
+    </div>
+  </section>
+
+  <!-- Post grid -->
+  <section class="py-24" style="background: var(--color-bg);">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {posts.map(post => (
+          <article class="relative bg-(--color-surface) border border-(--color-border) rounded-xl overflow-hidden card-hover group flex flex-col">
+            <!-- Top accent bar (coloured per tag) -->
+            <div class="h-0.5 w-full flex-shrink-0" style={`background: linear-gradient(90deg, ${post.accentColor}, transparent);`}></div>
+
+            <div class="p-7 flex flex-col flex-1">
+              <!-- Meta row -->
+              <div class="flex items-center justify-between mb-5">
+                <span class="text-xs font-semibold px-2.5 py-1 rounded-full border font-mono"
+                  style={`color: ${post.accentColor}; border-color: ${post.accentColor}33; background: ${post.accentColor}0d;`}>
+                  {post.tag}
+                </span>
+                <span class="text-xs text-(--color-fg-muted)">{post.readTime}</span>
+              </div>
+
+              <!-- Title -->
+              <h2 class="font-display text-lg font-bold mb-3 leading-snug text-(--color-fg) group-hover:text-(--color-accent) transition-colors">
+                <a href={post.slug}>{post.title}</a>
+              </h2>
+
+              <!-- Excerpt -->
+              <p class="text-(--color-fg-muted) text-sm leading-relaxed flex-1">{post.excerpt}</p>
+
+              <!-- Footer -->
+              <div class="flex items-center justify-between mt-6 pt-4 border-t border-white/5">
+                <div class="flex items-center gap-2">
+                  <div class="w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-black text-(--color-accent)" style="background: var(--color-teal-glow); border: 1px solid var(--color-teal-edge);">IZ</div>
+                  <div>
+                    <div class="text-xs text-(--color-fg-2) font-medium">Ismail Zemouri</div>
+                    <div class="text-xs text-(--color-fg-muted)">{post.date}</div>
+                  </div>
+                </div>
+                <a href={post.slug} class="text-xs font-semibold text-(--color-accent) hover:gap-2 flex items-center gap-1 transition-all">
+                  Read →
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter / CTA -->
+  <section class="py-24 mesh-gradient">
+    <div class="max-w-2xl mx-auto px-6 text-center">
+      <div class="relative bg-(--color-surface) border border-(--color-teal-edge) rounded-2xl p-12 overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse at 50% 100%, rgba(14,165,233,0.10) 0%, transparent 60%);"></div>
+        <div class="relative">
+          <span class="inline-block text-xs font-semibold tracking-widest uppercase text-(--color-accent) bg-(--color-teal-glow) border border-(--color-teal-edge) rounded-full px-4 py-1 mb-5">New posts monthly</span>
+          <h2 class="font-display text-2xl font-bold mb-3 tracking-tight">PKI & Security — no noise</h2>
+          <p class="text-(--color-fg-muted) text-sm mb-6">Get notified when I publish. Senior signal only.</p>
+          <a href="/contact" class="inline-flex items-center gap-2 px-7 py-3.5 bg-(--color-accent) text-white rounded-lg font-semibold font-display hover:bg-(--color-accent-hover) transition-all btn-glow text-sm">
+            Get in Touch →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>

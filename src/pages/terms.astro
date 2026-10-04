@@ -1,0 +1,119 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const sections = [
+  {
+    n: '1',
+    title: 'Service Provider',
+    body: `<p><strong class="text-(--color-fg)">MYKEYPAIR SRL</strong> ("we", "us") is a cybersecurity and PKI consulting company incorporated in Belgium.</p>
+<p class="mt-2">Contact: <a href="mailto:ismail@mykeypair.be" class="text-(--color-accent) hover:text-(--color-accent-light) transition-colors">ismail@mykeypair.be</a></p>`
+  },
+  {
+    n: '2',
+    title: 'Description of Service',
+    body: `<p>MYKEYPAIR operates a <strong class="text-(--color-fg)">personal finance tracking service</strong> that integrates with open banking APIs via <strong class="text-(--color-fg)">Enable Banking Oy</strong> (a licensed Account Information Service Provider, FIN-FSA, Finland) to retrieve read-only banking transaction data with your explicit PSD2 consent. The data is displayed in a self-hosted <strong class="text-(--color-fg)">Firefly III</strong> instance for personal financial management.</p>
+<p class="mt-2">The service is intended for <strong class="text-(--color-fg)">personal use only</strong> by the individual account holder. It is not a banking service, payment service, or financial advisory service.</p>`
+  },
+  {
+    n: '3',
+    title: 'Eligibility',
+    body: `<ul class="list-none space-y-1.5">
+<li class="flex gap-2"><span class="text-(--color-accent) mt-0.5">▸</span> You must be at least <strong class="text-(--color-fg)">18 years old</strong></li>
+<li class="flex gap-2"><span class="text-(--color-accent) mt-0.5">▸</span> You must reside in the <strong class="text-(--color-fg)">European Economic Area (EEA)</strong></li>
+<li class="flex gap-2"><span class="text-(--color-accent) mt-0.5">▸</span> You must be the <strong class="text-(--color-fg)">legitimate holder</strong> of any bank accounts you connect</li>
+<li class="flex gap-2"><span class="text-(--color-accent) mt-0.5">▸</span> You must have the legal capacity to enter into this agreement</li>
+</ul>`
+  },
+  {
+    n: '4',
+    title: 'PSD2 Consent and Open Banking',
+    body: `<p>By connecting a bank account, you grant an explicit <strong class="text-(--color-fg)">PSD2 Account Information Services (AIS) consent</strong> to Enable Banking Oy to retrieve read-only transaction data on your behalf. This consent:</p>
+<ul class="list-none space-y-1.5 mt-3">
+<li class="flex gap-2"><span class="text-(--color-accent) mt-0.5">▸</span> Is <strong class="text-(--color-fg)">read-only</strong> — we cannot initiate payments or modify your accounts</li>
+<li class="flex gap-2"><span class="text-(--color-accent) mt-0.5">▸</span> Can be <strong class="text-(--color-fg)">revoked at any time</strong> through your bank or by contacting us</li>
+<li class="flex gap-2"><span class="text-(--color-accent) mt-0.5">▸</span> Expires automatically per PSD2 regulations (typically 90 days)</li>
+<li class="flex gap-2"><span class="text-(--color-accent) mt-0.5">▸</span> Is governed by Directive (EU) 2015/2366 (PSD2)</li>
+</ul>`
+  },
+  {
+    n: '5',
+    title: 'Permitted Use',
+    body: `<p>You agree to use this service only for lawful <strong class="text-(--color-fg)">personal finance tracking</strong>. You must not:</p>
+<ul class="list-none space-y-1.5 mt-3">
+<li class="flex gap-2"><span class="text-(--color-red) mt-0.5">▸</span> Share your account access with third parties</li>
+<li class="flex gap-2"><span class="text-(--color-red) mt-0.5">▸</span> Use the service for commercial redistribution of financial data</li>
+<li class="flex gap-2"><span class="text-(--color-red) mt-0.5">▸</span> Attempt to reverse-engineer, scrape, or exploit the service infrastructure</li>
+<li class="flex gap-2"><span class="text-(--color-red) mt-0.5">▸</span> Use the service in violation of any applicable law or regulation</li>
+<li class="flex gap-2"><span class="text-(--color-red) mt-0.5">▸</span> Connect bank accounts belonging to third parties without their explicit consent</li>
+</ul>`
+  },
+  {
+    n: '6',
+    title: 'Intellectual Property',
+    body: `<p>All software, designs, and content provided as part of this service remain the intellectual property of MYKEYPAIR SRL or their respective owners. <strong class="text-(--color-fg)">Your banking data belongs to you.</strong> We do not claim ownership over any financial data retrieved from your accounts.</p>`
+  },
+  {
+    n: '7',
+    title: 'Limitation of Liability',
+    body: `<p>The service is provided <strong class="text-(--color-fg)">"as is"</strong> without warranties of any kind. MYKEYPAIR SRL shall not be liable for:</p>
+<ul class="list-none space-y-1.5 mt-3">
+<li class="flex gap-2"><span class="text-(--color-fg-muted) mt-0.5">▸</span> Data inaccuracies from upstream banking APIs or Enable Banking</li>
+<li class="flex gap-2"><span class="text-(--color-fg-muted) mt-0.5">▸</span> Service interruptions, downtime, or data loss</li>
+<li class="flex gap-2"><span class="text-(--color-fg-muted) mt-0.5">▸</span> Financial decisions made based on data displayed in the service</li>
+<li class="flex gap-2"><span class="text-(--color-fg-muted) mt-0.5">▸</span> Any indirect, incidental, or consequential damages</li>
+</ul>`
+  },
+  {
+    n: '8',
+    title: 'Service Availability',
+    body: `<p>We do not guarantee uninterrupted availability. Maintenance, updates, or upstream provider issues (Enable Banking, bank APIs) may cause temporary unavailability without prior notice. We will make reasonable efforts to communicate planned downtime.</p>`
+  },
+  {
+    n: '9',
+    title: 'Modifications',
+    body: `<p>We reserve the right to modify or discontinue the service at any time. We will provide reasonable notice of material changes by email where possible. Continued use after changes constitutes acceptance of the updated terms.</p>`
+  },
+  {
+    n: '10',
+    title: 'Governing Law and Jurisdiction',
+    body: `<p>These Terms are governed by the laws of <strong class="text-(--color-fg)">Belgium</strong>. Any disputes arising out of or relating to these Terms shall be subject to the exclusive jurisdiction of the courts of <strong class="text-(--color-fg)">Brussels, Belgium</strong>.</p>`
+  },
+  {
+    n: '11',
+    title: 'Contact',
+    body: `<p>For questions about these Terms, contact us at: <a href="mailto:ismail@mykeypair.be" class="text-(--color-accent) hover:text-(--color-accent-light) transition-colors">ismail@mykeypair.be</a></p>
+<p class="mt-2">For privacy-related requests, see our <a href="/privacy" class="text-(--color-accent) hover:text-(--color-accent-light) transition-colors">Privacy Policy</a>.</p>`
+  },
+];
+---
+
+<Layout title="Terms of Service" description="MYKEYPAIR Terms of Service — Personal finance tracking service powered by PSD2 open banking. Belgian law, GDPR-compliant.">
+
+  <!-- Header -->
+  <section class="py-16 mesh-gradient">
+    <div class="max-w-3xl mx-auto px-6">
+      <span class="inline-block text-xs font-semibold tracking-widest uppercase text-(--color-accent) bg-(--color-teal-glow) border border-(--color-teal-edge) rounded-full px-4 py-1 mb-5">Legal</span>
+      <h1 class="font-display text-3xl md:text-4xl font-bold mb-3 tracking-tight">Terms of Service</h1>
+      <p class="text-(--color-fg-muted) text-sm">Last updated: 12 April 2026</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="py-16" style="background: var(--color-bg);">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="space-y-8">
+        {sections.map(s => (
+          <div class="relative bg-(--color-surface) border border-(--color-border) rounded-xl p-7 overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-px" style="background: linear-gradient(90deg, var(--color-border-strong), transparent);"></div>
+            <h2 class="font-display font-semibold text-base mb-4 flex items-center gap-3 text-(--color-fg)">
+              <span class="w-6 h-6 rounded-md flex items-center justify-center text-xs font-bold flex-shrink-0 text-(--color-accent)" style="background: var(--color-teal-glow); border: 1px solid var(--color-teal-edge);">{s.n}</span>
+              {s.title}
+            </h2>
+            <div class="text-sm text-(--color-fg-muted) leading-relaxed" set:html={s.body}></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Layout>

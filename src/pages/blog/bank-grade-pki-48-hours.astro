@@ -1,0 +1,155 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="I Built a Full PKI in 48 Hours to Write a Better RFP" description="Understanding every component by building it — EJBCA, HA, mTLS, ACME, CRL, OCSP.">
+  <article class="py-20 bg-(--color-darker)">
+    <div class="max-w-3xl mx-auto px-6">
+
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="text-xs font-mono-custom px-3 py-1 rounded-full border border-(--color-accent)/30 text-(--color-accent)">PKI</span>
+          <span class="text-xs text-(--color-muted)">8 min read · March 28, 2026</span>
+        </div>
+        <h1 class="font-heading text-4xl md:text-5xl font-bold leading-tight mb-6">I Built a Full PKI in 48 Hours. Not to Ship It — to Understand It.</h1>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-(--color-accent)/20 flex items-center justify-center"><span class="text-sm font-bold text-(--color-accent)">IZ</span></div>
+          <div><div class="text-sm font-medium">Ismail Zemouri</div><div class="text-xs text-(--color-muted)">CISSP · PKI Architect</div></div>
+        </div>
+      </div>
+
+      <div class="prose prose-invert max-w-none space-y-6 text-(--color-muted) leading-relaxed">
+
+        <p class="text-lg text-(--color-light)">
+          I was about to write an RFP for a bank's PKI infrastructure. Certificate Authority, Key Management System, HSM integration, lifecycle management — the full stack. And I realized I had a problem: I'd evaluated these products from vendor slides and documentation, but I'd never built one end-to-end myself.
+        </p>
+
+        <p>
+          How do you write technical requirements for something you've never assembled? How do you know which questions to ask vendors if you've never hit the edge cases yourself? You can't. So instead of writing the RFP first, I built the thing.
+        </p>
+
+        <p>
+          Two days later, I had a fully functional PKI running on a hardened VPS: Root CA, Issuing CA, OCSP responder, CRL distribution, ACME server for automated enrollment, mTLS authentication, HA failover with PostgreSQL replication, and monitoring with Telegram alerts. Every component. Every integration point. Every failure mode I could simulate.
+        </p>
+
+        <p>
+          And thanks to AI as my engineering co-pilot, what would have taken weeks of trial and error took 48 hours of focused building. Not because AI replaced the thinking — but because it handled the typing, the config file syntax, the troubleshooting loops, while I made the architecture decisions.
+        </p>
+
+        <h2 class="font-heading text-2xl font-bold text-(--color-light) mt-12 mb-4">Why Build Before You Specify?</h2>
+
+        <p>Here's what I learned by building that I could never have learned from a vendor demo:</p>
+
+        <ul class="space-y-4 ml-4">
+          <li class="flex items-start gap-2"><span class="text-(--color-accent) mt-1">→</span> <span><strong class="text-(--color-light)">EJBCA Community Edition can't do interactive CLI in Docker.</strong> The <code class="bg-(--color-card) px-2 py-1 rounded text-xs">ca init</code> command uses Java's System.console() which returns null in a container. No vendor doc mentions this. I had to generate the CA keys with OpenSSL externally and import via PKCS#12. That's a real-world constraint that changes your deployment procedure.</span></li>
+          <li class="flex items-start gap-2"><span class="text-(--color-accent) mt-1">→</span> <span><strong class="text-(--color-light)">OCSP over HTTPS causes a chicken-and-egg problem.</strong> If your PKI is down, HTTPS can't verify itself. RFC 5280 says CRL/OCSP should be HTTP — but Caddy auto-redirects everything to HTTPS. Took real debugging to solve.</span></li>
+          <li class="flex items-start gap-2"><span class="text-(--color-accent) mt-1">→</span> <span><strong class="text-(--color-light)">HA failover actually works — but node recovery takes 2 minutes.</strong> I killed Node 1, Caddy routed to Node 2 instantly, zero downtime. But when Node 1 came back, the crypto token needed re-activation. That's an operational detail that belongs in your SOP, not discovered during an incident.</span></li>
+          <li class="flex items-start gap-2"><span class="text-(--color-accent) mt-1">→</span> <span><strong class="text-(--color-light)">Docker network segmentation is critical but tricky.</strong> Internal networks block internet access (good for the CA database), but they also block the host's Caddy from reaching containers. You need multi-homed containers with static IPs. The IP addressing scheme matters.</span></li>
+        </ul>
+
+        <p>None of this is in any vendor's sales deck. All of it goes into my RFP.</p>
+
+        <h2 class="font-heading text-2xl font-bold text-(--color-light) mt-12 mb-4">The Architecture I Ended Up With</h2>
+
+        <div class="bg-(--color-card) rounded-xl p-6 border border-white/10 font-mono-custom text-sm overflow-x-auto my-8">
+          <pre class="text-(--color-muted)"><span class="text-(--color-accent)">MKP Root CA G1</span> (ECC P-384, 20-year validity, offline)
+  └── <span class="text-(--color-cyber)">MKP Issuing CA G1</span> (ECC P-256, 10-year validity, online)
+       ├── TLS Server Certificates
+       ├── TLS Client Certificates (mTLS)
+       └── OCSP Signing Certificates
+
+<span class="text-(--color-emerald)">Infrastructure:</span>
+  5 Docker networks (isolated, no cross-talk)
+  2 EJBCA nodes (active/passive HA)
+  2 PostgreSQL instances (streaming replication)
+  1 CRL Distribution Point (nginx)
+  1 ACME server (step-ca)
+  Caddy reverse proxy (mTLS + Let's Encrypt)</pre>
+        </div>
+
+        <h2 class="font-heading text-2xl font-bold text-(--color-light) mt-12 mb-4">The HA Proof</h2>
+
+        <p>The moment that justified the entire exercise — killing a CA node mid-operation:</p>
+
+        <div class="bg-(--color-card) rounded-xl border border-white/10 overflow-hidden my-8">
+          <div class="flex items-center gap-2 px-4 py-3 bg-black/30 border-b border-white/5">
+            <div class="w-3 h-3 rounded-full bg-red-500/80"></div><div class="w-3 h-3 rounded-full bg-yellow-500/80"></div><div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+            <span class="text-xs text-(--color-muted) ml-2 font-mono-custom">failover test</span>
+          </div>
+          <div class="p-6 font-mono-custom text-sm">
+            <p><span class="text-(--color-emerald)">$</span> docker stop ejbca-node1</p>
+            <p class="text-(--color-muted) mt-1">ejbca-node1</p>
+            <p class="mt-2"><span class="text-(--color-emerald)">$</span> curl https://pki.mykeypair.be/ejbca/publicweb/healthcheck/ejbcahealth</p>
+            <p class="text-(--color-accent) mt-1">ALLOK</p>
+            <p class="text-(--color-muted) mt-2 text-xs">→ Zero downtime. Caddy detected the failure and routed to Node 2.</p>
+            <p class="text-(--color-muted) text-xs">→ Database replication: still streaming, zero lag.</p>
+          </div>
+        </div>
+
+        <p>Now I know exactly what HA looks like in practice — not in a vendor whitepaper. I know the recovery time (2 minutes). I know the failure modes. I know what to put in the DR test plan.</p>
+
+        <h2 class="font-heading text-2xl font-bold text-(--color-light) mt-12 mb-4">mTLS: Seeing Zero Trust Work</h2>
+
+        <div class="bg-(--color-card) rounded-xl border border-white/10 overflow-hidden my-8">
+          <div class="flex items-center gap-2 px-4 py-3 bg-black/30 border-b border-white/5">
+            <div class="w-3 h-3 rounded-full bg-red-500/80"></div><div class="w-3 h-3 rounded-full bg-yellow-500/80"></div><div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+            <span class="text-xs text-(--color-muted) ml-2 font-mono-custom">mTLS</span>
+          </div>
+          <div class="p-6 font-mono-custom text-sm">
+            <p class="text-(--color-muted)"><span class="text-(--color-emerald)">$</span> curl https://test.mykeypair.be/ <span class="text-red-400"># no cert</span></p>
+            <p class="text-red-400 mt-1">curl: (56) Connection reset</p>
+            <p class="mt-3 text-(--color-muted)"><span class="text-(--color-emerald)">$</span> curl --cert client.p12 https://test.mykeypair.be/</p>
+            <p class="text-(--color-accent) mt-1">mTLS verified! You are authenticated by MKP PKI.</p>
+            <p class="text-(--color-muted)">Subject: CN=Ismail Zemouri,O=MYKEYPAIR,C=BE</p>
+          </div>
+        </div>
+
+        <p>Not a 403. Not a login page. <strong class="text-(--color-light)">Connection reset.</strong> The server won't even talk to you without a valid certificate. That's what Zero Trust looks like when you actually implement it.</p>
+
+        <h2 class="font-heading text-2xl font-bold text-(--color-light) mt-12 mb-4">The AI Factor</h2>
+
+        <p>
+          I need to be honest about the role AI played here. I used Claude as my engineering co-pilot throughout the build. It wrote Docker configs, debugged Caddy routing issues, generated compliance documentation, and handled the repetitive parts — while I made every architecture decision, chose algorithms, designed the network topology, and decided what to build and why.
+        </p>
+
+        <p>
+          The result: what would normally take a solo engineer 2-3 weeks of evenings took 48 hours of intense, focused work. The AI didn't replace expertise — it amplified it. I still needed to know what "right" looks like. But I didn't need to remember every OpenSSL flag or Docker Compose syntax.
+        </p>
+
+        <p>
+          This is the future of security engineering. Not AI replacing architects, but architects moving faster because the implementation friction is gone. The thinking still matters. The typing doesn't.
+        </p>
+
+        <h2 class="font-heading text-2xl font-bold text-(--color-light) mt-12 mb-4">What This Means for the RFP</h2>
+
+        <p>My RFP is now grounded in reality, not theory:</p>
+
+        <ul class="space-y-2 ml-4">
+          <li class="flex items-start gap-2"><span class="text-(--color-emerald) mt-1">✓</span> <span>I know which EJBCA features require Enterprise vs Community edition</span></li>
+          <li class="flex items-start gap-2"><span class="text-(--color-emerald) mt-1">✓</span> <span>I know what HA actually requires in terms of database replication</span></li>
+          <li class="flex items-start gap-2"><span class="text-(--color-emerald) mt-1">✓</span> <span>I know the operational procedures that must exist before go-live</span></li>
+          <li class="flex items-start gap-2"><span class="text-(--color-emerald) mt-1">✓</span> <span>I know what Certificate Lifecycle Management needs to cover beyond basic issuance</span></li>
+          <li class="flex items-start gap-2"><span class="text-(--color-emerald) mt-1">✓</span> <span>I know the security hardening baseline a PKI server must meet (Lynis 77+)</span></li>
+          <li class="flex items-start gap-2"><span class="text-(--color-emerald) mt-1">✓</span> <span>I can challenge vendor claims because I've seen what works and what breaks</span></li>
+        </ul>
+
+        <p class="mt-6">
+          The best technical requirements come from people who've built the thing. Not from people who've read about it.
+        </p>
+
+        <h2 class="font-heading text-2xl font-bold text-(--color-light) mt-12 mb-4">The Takeaway</h2>
+
+        <p>
+          If you're responsible for specifying PKI infrastructure for your organization — build a proof of concept first. Not to ship it. To <strong class="text-(--color-light)">understand</strong> it. Every edge case you discover in the POC is a requirement you'd otherwise miss in the RFP. Every failure mode you simulate is an SOP you need to write.
+        </p>
+
+        <p>
+          And if you don't have 48 hours to spare, <a href="/contact" class="text-(--color-accent) hover:text-(--color-accent-light) underline">I've already done it</a>. I can help you map your requirements to reality — because I've lived the gap between vendor promises and production deployment.
+        </p>
+
+      </div>
+
+      <div class="mt-16 pt-8 border-t border-white/5"><a href="/blog" class="text-(--color-accent) hover:text-(--color-accent-light) text-sm font-medium">&larr; Back to Blog</a></div>
+    </div>
+  </article>
+</Layout>

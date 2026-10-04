@@ -1,0 +1,191 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const topics = [
+  'PKI Consulting',
+  'Security Assessment',
+  'mTLS / Zero Trust',
+  'DORA Compliance',
+  'Other',
+];
+
+const helps = [
+  'PKI design and deployment',
+  'Security assessment / pentest',
+  'mTLS / Zero Trust implementation',
+  'DORA / ISO 27001 compliance',
+  'Certificate lifecycle management',
+  'Server hardening (CIS benchmarks)',
+];
+---
+
+<Layout title="Contact" description="Get in touch for PKI consulting and security assessments">
+
+  <!-- Header -->
+  <section class="py-24 mesh-gradient">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <span class="inline-block text-xs font-semibold tracking-widest uppercase text-(--color-accent) bg-(--color-teal-glow) border border-(--color-teal-edge) rounded-full px-4 py-1 mb-6">
+        Ready to start?
+      </span>
+      <h1 class="font-display text-4xl md:text-5xl font-bold mb-5 tracking-tight">
+        Let's talk about your PKI estate.
+      </h1>
+      <p class="text-(--color-fg-muted) text-lg max-w-xl mx-auto leading-relaxed">
+        30-minute discovery call — senior-to-senior. No sales deck, no demos, no junior account manager.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main grid -->
+  <section class="py-24" style="background: var(--color-bg);">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="grid lg:grid-cols-[1fr_380px] gap-12 items-start">
+
+        <!-- Contact form -->
+        <div class="relative bg-(--color-surface) border border-(--color-border) rounded-xl p-10 overflow-hidden card-accent">
+          <h2 class="font-display font-bold text-xl mb-7 text-(--color-fg)">Send a message</h2>
+
+          <form id="contact-form" class="space-y-5">
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
+            <div>
+              <label class="block text-sm font-medium mb-2 text-(--color-fg-2)" for="name">Name</label>
+              <input type="text" id="name" name="name" required placeholder="Firstname Lastname"
+                class="w-full rounded-lg px-4 py-3 text-sm text-(--color-fg) border border-(--color-border) focus:outline-none focus:border-(--color-accent) transition-colors"
+                style="background: var(--color-bg);" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-2 text-(--color-fg-2)" for="email">Email</label>
+              <input type="email" id="email" name="email" required placeholder="you@bank.eu"
+                class="w-full rounded-lg px-4 py-3 text-sm text-(--color-fg) border border-(--color-border) focus:outline-none focus:border-(--color-accent) transition-colors"
+                style="background: var(--color-bg);" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-2 text-(--color-fg-2)" for="subject">Topic</label>
+              <select id="subject" name="subject"
+                class="w-full rounded-lg px-4 py-3 text-sm text-(--color-fg) border border-(--color-border) focus:outline-none focus:border-(--color-accent) transition-colors"
+                style="background: var(--color-bg);">
+                {topics.map(t => <option>{t}</option>)}
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-2 text-(--color-fg-2)" for="message">Message</label>
+              <textarea id="message" name="message" rows="5" required
+                placeholder="Tell me about your project or question..."
+                class="w-full rounded-lg px-4 py-3 text-sm text-(--color-fg) border border-(--color-border) focus:outline-none focus:border-(--color-accent) transition-colors resize-none"
+                style="background: var(--color-bg);"></textarea>
+            </div>
+
+            <button type="submit" id="submit-btn"
+              class="w-full px-8 py-4 bg-(--color-accent) text-white rounded-lg font-semibold font-display hover:bg-(--color-accent-hover) transition-all btn-glow">
+              Send Message →
+            </button>
+
+            <div id="form-status" class="text-center text-sm hidden"></div>
+            <p class="text-xs text-(--color-fg-muted) text-center">Response within 24 hours. Your data is never shared.</p>
+          </form>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-6">
+
+          <!-- Contact details card -->
+          <div class="relative bg-(--color-surface) border border-(--color-border) rounded-xl p-7 overflow-hidden card-accent">
+            <h3 class="font-display font-semibold text-sm uppercase tracking-wider text-(--color-fg-muted) mb-5">Contact</h3>
+            <div class="space-y-5">
+              <div>
+                <div class="text-xs text-(--color-fg-muted) uppercase tracking-wider mb-1">Email</div>
+                <a href="mailto:ismail.zemouri@mykeypair.be" class="text-sm text-(--color-accent) hover:text-(--color-accent-light) transition-colors">
+                  ismail.zemouri@mykeypair.be
+                </a>
+              </div>
+              <div>
+                <div class="text-xs text-(--color-fg-muted) uppercase tracking-wider mb-1">Phone</div>
+                <a href="tel:+32494060773" class="text-sm text-(--color-accent) hover:text-(--color-accent-light) transition-colors">
+                  +32 494 06 07 73
+                </a>
+              </div>
+              <div>
+                <div class="text-xs text-(--color-fg-muted) uppercase tracking-wider mb-1">Location</div>
+                <p class="text-sm text-(--color-fg-2)">Brussels, Belgium</p>
+                <p class="text-xs text-(--color-fg-muted) mt-0.5">Serving clients across the EU</p>
+              </div>
+              <div>
+                <div class="text-xs text-(--color-fg-muted) uppercase tracking-wider mb-1">Response</div>
+                <p class="text-sm text-(--color-fg-2)">Within 24 hours</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- I can help with -->
+          <div class="relative bg-(--color-surface) border border-(--color-border) rounded-xl p-7 overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-0.5" style="background: linear-gradient(90deg, var(--color-accent), transparent);"></div>
+            <h3 class="font-display font-semibold text-sm uppercase tracking-wider text-(--color-fg-muted) mb-5">I can help with</h3>
+            <ul class="space-y-2.5">
+              {helps.map(h => (
+                <li class="flex items-center gap-3 text-sm text-(--color-fg-2)">
+                  <span class="w-1.5 h-1.5 rounded-full bg-(--color-accent) flex-shrink-0"></span>
+                  {h}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Trust badge -->
+          <div class="border border-(--color-gold-edge) rounded-xl p-5 text-center" style="background: var(--color-gold-bg);">
+            <div class="text-(--color-gold) font-display font-bold text-sm tracking-wider mb-1">✦ CISSP Certified</div>
+            <div class="text-(--color-fg-muted) text-xs">Brussels-based · Senior-only · EU-fluent</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<script>
+  document.getElementById('contact-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const btn = document.getElementById('submit-btn') as HTMLButtonElement;
+    const status = document.getElementById('form-status')!;
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    status.className = 'text-center text-sm hidden';
+
+    const data = {
+      name: (form.elements.namedItem('name') as HTMLInputElement).value,
+      email: (form.elements.namedItem('email') as HTMLInputElement).value,
+      subject: (form.elements.namedItem('subject') as HTMLSelectElement).value,
+      message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
+    };
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        status.textContent = '✓ Message sent! I\'ll reply within 24 hours — from Brussels.';
+        status.className = 'text-center text-sm text-green-400 p-3 rounded-lg';
+        status.style.background = 'rgba(34,197,94,0.08)';
+        form.reset();
+      } else {
+        throw new Error('Server error');
+      }
+    } catch {
+      status.textContent = 'Something went wrong. Email me directly: ismail.zemouri@mykeypair.be';
+      status.className = 'text-center text-sm text-red-400';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Send Message →';
+      status.classList.remove('hidden');
+    }
+  });
+</script>
