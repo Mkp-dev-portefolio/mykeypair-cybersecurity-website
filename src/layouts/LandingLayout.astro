@@ -1,0 +1,74 @@
+---
+// Standalone layout for time-boxed campaign landing pages: same head and brand as Layout.astro,
+// minimal header (logo + one CTA) and slim footer, no site navigation.
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  ctaHref?: string;
+  ctaLabel?: string;
+  unavailableAfter?: string; // ISO date; Google honours "unavailable_after" and drops the page from the index
+}
+
+const { title, description, canonical, ctaHref = '#assessment', ctaLabel = 'Book an assessment →', unavailableAfter } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content={description} />
+  <meta name="generator" content={Astro.generator} />
+  {unavailableAfter && <meta name="robots" content={`index, follow, unavailable_after: ${unavailableAfter}`} />}
+  <link rel="canonical" href={canonical} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:title" content={`${title} | MYKEYPAIR`} />
+  <meta property="og:description" content={description} />
+  <meta property="og:site_name" content="MYKEYPAIR" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <title>{title} | MYKEYPAIR</title>
+</head>
+<body class="bg-(--color-bg) text-(--color-fg) font-body antialiased">
+
+  <header class="fixed top-0 w-full z-50 border-b border-(--color-border)" style="background: rgba(11,21,38,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); height: 72px;">
+    <div class="max-w-[1200px] mx-auto px-6 h-full flex items-center justify-between">
+      <a href="/" class="font-heading font-[800] text-xl tracking-tight text-(--color-fg) no-underline" style="letter-spacing: -0.02em;" aria-label="MYKEYPAIR home">
+        MYKEY<span class="text-(--color-accent)">PAIR</span>
+      </a>
+      <a href={ctaHref} data-cta="header" class="px-5 py-2.5 bg-(--color-accent) text-white rounded-lg font-heading font-semibold text-sm no-underline hover:brightness-110 transition-all">
+        {ctaLabel}
+      </a>
+    </div>
+  </header>
+
+  <main style="padding-top: 72px;">
+    <slot />
+  </main>
+
+  <footer class="border-t border-(--color-border) bg-(--color-bg-deep)" style="padding: 36px 0 28px; margin-top: 80px;">
+    <div class="max-w-[1200px] mx-auto px-6 flex flex-wrap items-center justify-between gap-4 text-[12px] text-(--color-fg-faint)">
+      <span>&copy; {new Date().getFullYear()} MYKEYPAIR SRL · Brussels · BE0800.696.267</span>
+      <span class="flex gap-5">
+        <a href="mailto:ismail.zemouri@mykeypair.be" class="text-(--color-fg-muted) hover:text-(--color-fg) no-underline">ismail.zemouri@mykeypair.be</a>
+        <a href="/privacy" class="text-(--color-fg-muted) hover:text-(--color-fg) no-underline">Privacy</a>
+        <a href="/terms" class="text-(--color-fg-muted) hover:text-(--color-fg) no-underline">Terms</a>
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('fade-in'); observer.unobserve(entry.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('[data-animate]').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>

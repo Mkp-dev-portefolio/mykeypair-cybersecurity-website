@@ -16,6 +16,9 @@ ALLOWED_ORIGINS = ['https://staging.mykeypair.be', 'https://mykeypair.be', 'http
 CONSENT_LOG = os.environ.get('CONSENT_LOG', '/var/www/mykeypair-data/cookie-consents.json')
 VISITOR_LOG = os.environ.get('VISITOR_LOG', '/var/www/mykeypair-data/visitors.jsonl')
 PORT = 8900
+# Optional lead fields accepted from landing-page forms (stored under 'lead', never required).
+LEAD_EXTRA_FIELDS = ['company', 'role', 'platform', 'volume', 'challenge', 'context', 'page',
+                     'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
 
 
 def send_telegram(text):
@@ -151,12 +154,20 @@ class ContactHandler(BaseHTTPRequestHandler):
         timestamp = datetime.now(timezone.utc).isoformat()
         fingerprint = self._get_visitor_fingerprint()
 
+        # Optional structured lead fields (landing pages). Unknown keys are ignored, values truncated.
+        extra = {}
+        for key in LEAD_EXTRA_FIELDS:
+            value = str(data.get(key, '')).strip()
+            if value:
+                extra[key] = value[:300]
+
         entry = {
             'timestamp': timestamp,
             'name': name,
             'email': email,
             'subject': subject,
             'message': message,
+            **({'lead': extra} if extra else {}),
             **fingerprint
         }
 
@@ -178,7 +189,9 @@ class ContactHandler(BaseHTTPRequestHandler):
             f'<b>Email:</b> {email}\n'
             f'<b>Subject:</b> {subject}\n'
             f'<b>Message:</b>\n{message}\n'
-            f'━━━━━━━━━━━━━━━━━━━━\n'
+            + (f'<b>Company:</b> {extra.get("company", "")} · <b>Role:</b> {extra.get("role", "")}\n' if extra else '')
+            + (f'<b>Campaign:</b> {extra.get("utm_campaign", "")} / {extra.get("utm_source", "")} / {extra.get("utm_medium", "")}\n' if extra.get('utm_campaign') or extra.get('utm_source') else '')
+            + f'━━━━━━━━━━━━━━━━━━━━\n'
             f'<b>IP:</b> {fingerprint["ip_hash"]}\n'
             f'<b>UA:</b> {fingerprint["user_agent"][:80]}\n'
             f'<b>Lang:</b> {fingerprint["accept_language"][:30]}\n'

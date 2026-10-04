@@ -1,0 +1,608 @@
+---
+import LandingLayout from '../layouts/LandingLayout.astro';
+
+const title = 'Certificate Automation & CLM Transition';
+const description = 'Certificate discovery, lifecycle automation and controlled migration for public TLS and enterprise PKI. Know every certificate, automate every renewal, be ready for shorter TLS lifetimes. Book a CLM Readiness Assessment.';
+const canonical = 'https://mykeypair.be/certificate-automation';
+const campaign = 'clm_transition_2026';
+// Time-boxed campaign page: live until this date, then redirected to the home page (see also the VPS expiry job).
+const unavailableAfter = '2026-11-03';
+
+const sources = {
+  digicert: 'https://knowledge.digicert.com/alerts/end-of-life-for-certcentral-automation-and-discovery',
+  cabforum: 'https://cabforum.org/2025/04/11/ballot-sc081v3-introduce-schedule-of-reducing-validity-and-data-reuse-periods/',
+};
+
+const problems = [
+  { t: 'Incomplete inventories', d: 'Certificates issued by several CAs, teams and tools, with no single list anyone trusts.' },
+  { t: 'Unknown owners', d: 'The certificate is known, the application behind it is not, and nobody answers the renewal email.' },
+  { t: 'Manual renewal and deployment', d: 'A ticket, a download, a copy to the server, a restart. Repeated for every endpoint, under time pressure.' },
+  { t: 'Fragmented tooling', d: 'CA portals, key vaults, scripts and spreadsheets that do not talk to each other.' },
+  { t: 'Deployment failures', d: 'Renewed at the CA, never installed on the target. The expiry date in the portal says fine; the browser says otherwise.' },
+  { t: 'Weak monitoring', d: 'Alerts on expiry dates, not on what is actually served. Legacy workflows nobody dares to touch.' },
+];
+
+const entries = [
+  { n: '01', t: 'Start from scratch', d: 'Discovery, assessment, target design, automation and operating model. We build the programme with you from the first inventory to the first automated renewal.' },
+  { n: '02', t: 'Strengthen a running programme', d: 'Unblock architecture, migration, governance or delivery. We take the open items your team has no time or specialist for.' },
+  { n: '03', t: 'Fill a critical expertise gap', d: 'PKI, HSM and KMS, cloud integration, automation, regulatory interpretation or programme coordination. One senior person where the gap is.' },
+];
+
+const phases = [
+  { k: 'Discover', o: 'Certificate inventory, owners and dependencies.' },
+  { k: 'Assess', o: 'Prioritized risk and automation matrix.' },
+  { k: 'Architect', o: 'Vendor-neutral target architecture and migration design.' },
+  { k: 'Automate', o: 'Issuance, deployment, renewal and validation workflows.' },
+  { k: 'Migrate', o: 'Controlled transition from legacy workflows.' },
+  { k: 'Operate', o: 'Monitoring, RACI, runbooks, handover and continuous improvement.' },
+];
+
+const outcomes = [
+  'Improved certificate visibility across CAs, clouds and teams',
+  'Reduced manual renewal effort on the endpoints in scope',
+  'Reliable deployment checks: what is served matches what was issued',
+  'Ownership clarity for every certificate that stays',
+  'Controlled migration away from legacy workflows',
+  'Readiness for shorter public TLS lifetimes',
+];
+
+const capabilities = [
+  { t: 'PKI and trust architecture', d: 'CA hierarchies, policies, HSM-backed keys, mTLS, OCSP and CRL.' },
+  { t: 'HSM and KMS', d: 'Key custody, dual control, integration with cloud key vaults and on-premise HSMs.' },
+  { t: 'Cloud automation', d: 'Pipelines that issue, deploy, verify and roll back on Azure, AWS and hybrid estates.' },
+  { t: 'Governance and delivery', d: 'Inventories, RACI, runbooks, regulatory mapping and programme coordination with vendors.' },
+];
+
+const assessmentQuestions = [
+  'What certificates exist, and where are they actually served?',
+  'Who owns them, application by application?',
+  'Which renewal and deployment steps remain manual?',
+  'What could fail under shorter lifetimes?',
+  'Which tooling and migration decisions matter first?',
+];
+
+const roadmap = [
+  { w: 'Week 1', t: 'Discover', d: 'Inventory from CAs, vaults and scans. Owner mapping starts.' },
+  { w: 'Week 2', t: 'Assess', d: 'Risk and automation matrix. First quick wins identified.' },
+  { w: 'Week 3', t: 'Architect', d: 'Target flows per technology. Credential and change model agreed.' },
+  { w: 'Week 4', t: 'Automate', d: 'First lane automated end to end on a non-production endpoint.' },
+  { w: 'Week 5', t: 'Migrate', d: 'Production lane switched under change control, legacy path kept as fallback.' },
+  { w: 'Week 6', t: 'Operate', d: 'Monitoring, runbook, RACI and handover to the run team.' },
+];
+
+const useCases = [
+  'Public TLS certificates on customer-facing websites',
+  'Private PKI certificates for internal services and machines',
+  'Load balancers and application delivery controllers',
+  'Reverse proxies and API gateways',
+  'Kubernetes ingress and service meshes',
+  'Cloud endpoints bound to managed key vaults',
+  'Hybrid estates mixing on-premise and cloud targets',
+  'HSM and KMS integrations for key custody',
+  'Certificate ownership mapping across business units',
+  'Migration from legacy renewal scripts and portals',
+  'Monitoring of what is served, not only what is issued',
+  'Operational handover to a run team with runbooks',
+];
+
+const platforms = ['Not sure yet', 'DigiCert CertCentral', 'Sectigo Certificate Manager', 'GlobalSign', "Let's Encrypt / ACME only", 'Keyfactor', 'Venafi / CyberArk', 'AppViewX', 'Microsoft AD CS', 'EJBCA', 'HashiCorp Vault / OpenBao', 'Cloud-native (Azure Key Vault, AWS ACM, GCP CAS)', 'Spreadsheet and scripts', 'Other'];
+const volumes = ['Fewer than 50', '50 to 200', '200 to 1,000', '1,000 to 10,000', 'More than 10,000', 'Unknown'];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Certificate Automation & CLM Transition Sprint',
+  provider: { '@type': 'Organization', name: 'MYKEYPAIR SRL', url: 'https://mykeypair.be' },
+  areaServed: 'Europe',
+  serviceType: 'Certificate lifecycle management consulting',
+  description,
+  url: canonical,
+};
+---
+
+<LandingLayout title={title} description={description} canonical={canonical} unavailableAfter={unavailableAfter} ctaHref="#assessment" ctaLabel="Book a CLM Readiness Assessment →">
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <!-- 1. HERO -->
+  <section class="relative overflow-hidden border-b border-(--color-border)" style="padding: 104px 0 80px;">
+    <div class="absolute inset-0 hero-grid" aria-hidden="true"></div>
+    <div class="absolute inset-0 hero-glow" aria-hidden="true"></div>
+    <div class="relative max-w-[1100px] mx-auto px-6">
+      <span class="eye-pill mb-6 inline-block">Certificate Automation &amp; CLM Transition Sprint</span>
+      <h1 class="font-heading font-[800] leading-[1.08] mb-6" style="font-size: clamp(38px, 5.6vw, 64px); letter-spacing: -0.03em;">
+        From certificate risk to<br class="hidden sm:block"/>
+        <em class="not-italic text-(--color-accent)">automated digital trust.</em>
+      </h1>
+      <p class="text-[20px] text-(--color-fg) font-medium max-w-[760px] mb-4" style="letter-spacing: -0.01em;">
+        Know every certificate. Automate every renewal. Be ready for 47-day TLS.
+      </p>
+      <p class="text-[17px] text-(--color-fg-2) leading-relaxed max-w-[760px] mb-9">
+        MYKEYPAIR designs and delivers the certificate automation programme from scratch, strengthens a project that is already running, or joins where the critical expertise is missing. For CISOs, PKI owners, infrastructure leaders, enterprise architects, platform and cloud teams.
+      </p>
+      <div class="flex flex-wrap gap-3.5 mb-8">
+        <a href="#assessment" data-cta="assessment-hero" class="inline-flex items-center px-8 py-4 bg-(--color-accent) text-white rounded-lg font-heading font-semibold text-[15px] no-underline btn-glow">
+          Book a CLM Readiness Assessment →
+        </a>
+        <a href="#assessment" data-cta="architect-hero" class="inline-flex items-center px-8 py-4 rounded-lg font-heading font-semibold text-[15px] text-(--color-accent) no-underline transition-all" style="border: 1.5px solid var(--color-accent);">
+          Talk to a PKI &amp; CLM architect
+        </a>
+      </div>
+      <ul class="flex flex-wrap gap-x-6 gap-y-2 text-[13px] text-(--color-fg-muted) list-none p-0 m-0">
+        <li>Public TLS and enterprise PKI</li>
+        <li>Vendor-neutral</li>
+        <li>Senior-only delivery, Brussels based</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- MARKET CONTEXT -->
+  <section class="bg-(--color-surface) border-b border-(--color-border)">
+    <div class="max-w-[1200px] mx-auto px-6 py-12">
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-(--color-bg) border border-(--color-border) rounded-xl p-7">
+          <div class="inline-block font-mono-custom text-[11px] font-medium text-(--color-accent) px-2.5 py-1 rounded mb-4" style="background: var(--color-teal-glow); letter-spacing: 0.06em;">1 OCTOBER 2026</div>
+          <h2 class="text-[17px] font-bold mb-2.5 leading-tight">DigiCert retired CertCentral Discovery scans and Managed Automation</h2>
+          <p class="text-[14px] text-(--color-fg-2) leading-relaxed mb-3">
+            Cloud and network discovery scans and Managed Automation in CertCentral reached end of life on 1 October 2026, and previous discovery scan data is no longer accessible. CertCentral ACME and API automation remain supported. If your inventory lived in those scans, you need a new baseline now.
+          </p>
+          <a href={sources.digicert} rel="noopener" target="_blank" class="text-[13px] text-(--color-accent) hover:text-(--color-accent-light)">Official DigiCert notice ↗</a>
+        </div>
+        <div class="bg-(--color-bg) border border-(--color-border) rounded-xl p-7">
+          <div class="inline-block font-mono-custom text-[11px] font-medium text-(--color-accent) px-2.5 py-1 rounded mb-4" style="background: var(--color-teal-glow); letter-spacing: 0.06em;">CA/BROWSER FORUM, BALLOT SC-081v3</div>
+          <h2 class="text-[17px] font-bold mb-2.5 leading-tight">Public TLS validity shrinks to 47 days by 2029</h2>
+          <ul class="text-[14px] text-(--color-fg-2) leading-relaxed mb-3 space-y-1 list-none p-0">
+            <li><span class="font-mono-custom text-(--color-fg)">200 days</span> maximum from 15 March 2026</li>
+            <li><span class="font-mono-custom text-(--color-fg)">100 days</span> maximum from 15 March 2027</li>
+            <li><span class="font-mono-custom text-(--color-fg)">47 days</span> maximum from 15 March 2029</li>
+          </ul>
+          <p class="text-[13px] text-(--color-fg-muted) leading-relaxed mb-3">
+            These limits apply to newly issued publicly trusted TLS certificates. Private PKI and other certificate types follow your own policies, which is why we separate public TLS readiness from the broader certificate lifecycle.
+          </p>
+          <a href={sources.cabforum} rel="noopener" target="_blank" class="text-[13px] text-(--color-accent) hover:text-(--color-accent-light)">Official CA/Browser Forum ballot ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. THE PROBLEM -->
+  <section class="py-24" id="problem">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <span class="eye-pill mb-4 block w-fit">The certificate lifecycle problem</span>
+      <h2 class="font-heading font-bold mb-4" style="font-size: clamp(28px, 4vw, 42px); letter-spacing: -0.02em;">
+        Most estates are renewed by hand, one surprise at a time.
+      </h2>
+      <p class="text-[18px] text-(--color-fg-muted) max-w-[680px] leading-relaxed mb-12">
+        The consequences are familiar: outages when a certificate expires on a server nobody mapped, rushed changes outside any window, audit gaps when the inventory cannot be produced, and a permanent operational load on the few people who know the procedure.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {problems.map((p) => (
+          <div class="bg-(--color-surface) border border-(--color-border) rounded-xl p-7 card-hover">
+            <h3 class="text-[16px] font-bold mb-2.5 leading-tight">{p.t}</h3>
+            <p class="text-[14px] text-(--color-fg-2) leading-relaxed">{p.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. ONE PARTNER, THREE ENTRY POINTS -->
+  <section class="py-24 bg-(--color-surface)" id="entry-points">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <span class="eye-pill mb-4 block w-fit">One partner, three entry points</span>
+      <h2 class="font-heading font-bold mb-4" style="font-size: clamp(28px, 4vw, 42px); letter-spacing: -0.02em;">
+        Enter at the stage you are at.
+      </h2>
+      <p class="text-[18px] text-(--color-fg-muted) max-w-[680px] leading-relaxed mb-12">
+        Whether nothing exists yet, a programme is stuck, or one skill is missing, the engagement starts where it is useful and stops when your team runs it alone.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {entries.map((e) => (
+          <div class="relative bg-(--color-bg) border border-(--color-border) rounded-xl p-8 overflow-hidden card-accent card-hover">
+            <div class="font-mono-custom text-[12px] text-(--color-accent) mb-4">{e.n}</div>
+            <h3 class="text-[18px] font-bold mb-3 leading-tight">{e.t}</h3>
+            <p class="text-[14px] text-(--color-fg-2) leading-relaxed">{e.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. SIX PHASES -->
+  <section class="py-24" id="phases">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <span class="eye-pill mb-4 block w-fit">Six service phases, concrete outputs</span>
+      <h2 class="font-heading font-bold mb-4" style="font-size: clamp(28px, 4vw, 42px); letter-spacing: -0.02em;">
+        Each phase ends with something you keep.
+      </h2>
+      <p class="text-[18px] text-(--color-fg-muted) max-w-[680px] leading-relaxed mb-12">
+        <strong class="text-(--color-fg) font-medium">Prepare</strong> runs across all six: shorter validity periods, changing requirements and crypto-agility are designed in from the first phase, not added at the end.
+      </p>
+      <ol class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none p-0 m-0">
+        {phases.map((ph, i) => (
+          <li class="bg-(--color-surface) border border-(--color-border) rounded-xl p-7 card-hover">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="w-8 h-8 rounded-full flex items-center justify-center font-heading font-bold text-[13px] text-white bg-(--color-accent)">{i + 1}</span>
+              <h3 class="text-[17px] font-bold leading-tight">{ph.k}</h3>
+            </div>
+            <p class="text-[14px] text-(--color-fg-2) leading-relaxed">{ph.o}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="mt-8 bg-(--color-surface) border border-(--color-border) rounded-xl p-7">
+        <h3 class="text-[15px] font-bold mb-2">Future readiness roadmap</h3>
+        <p class="text-[14px] text-(--color-fg-2) leading-relaxed">
+          Public TLS lifetimes step down in 2026, 2027 and 2029. The roadmap we deliver maps your public endpoints against those dates, your private PKI against your own policy, and lists the automation decisions that must be taken before each step. It does not promise universal compliance or a guaranteed timeline: both depend on your environment, integrations and change windows.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. ARCHITECTURE DIAGRAM -->
+  <section class="py-24 bg-(--color-surface)" id="approach">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <span class="eye-pill mb-4 block w-fit">Delivery approach informed by TOGAF ADM</span>
+      <h2 class="font-heading font-bold mb-4" style="font-size: clamp(28px, 4vw, 42px); letter-spacing: -0.02em;">
+        Baseline, target, transition, governance, operational change.
+      </h2>
+      <p class="text-[18px] text-(--color-fg-muted) max-w-[680px] leading-relaxed mb-10">
+        The six phases sit on a classic architecture cycle. Governance runs alongside; the feedback loop from operations reopens the baseline for the next iteration. You can enter at any step.
+      </p>
+      <div class="bg-(--color-bg) border border-(--color-border) rounded-xl p-4 sm:p-8 overflow-x-auto">
+        <svg viewBox="0 0 1200 520" role="img" aria-labelledby="adm-title adm-desc" class="w-full h-auto min-w-[720px]" xmlns="http://www.w3.org/2000/svg" font-family="Inter, system-ui, sans-serif">
+          <title id="adm-title">Delivery approach informed by TOGAF ADM</title>
+          <desc id="adm-desc">Five architecture stages from left to right: baseline, target, transition, implementation governance and operational change. The six service phases Discover, Assess, Architect, Automate, Migrate and Operate are placed under the stages they support. A governance band spans the whole cycle. Three entry points are marked: start from scratch at baseline, strengthen a running programme at transition, fill an expertise gap at any stage. A feedback loop returns from operational change to baseline.</desc>
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="#0EA5E9"/>
+            </marker>
+          </defs>
+
+          <!-- Governance band -->
+          <rect x="60" y="40" width="1080" height="46" rx="10" fill="rgba(245,158,11,0.10)" stroke="rgba(245,158,11,0.35)"/>
+          <text x="600" y="69" text-anchor="middle" font-size="16" font-weight="600" fill="#F59E0B">Implementation governance: owners, RACI, change control, evidence for audit</text>
+
+          <!-- Stage boxes -->
+          <g font-size="17" font-weight="700" fill="#F1F5F9">
+            <rect x="60" y="130" width="190" height="90" rx="12" fill="#112240" stroke="#1E3A5F"/>
+            <text x="155" y="168" text-anchor="middle">Baseline</text>
+            <text x="155" y="194" text-anchor="middle" font-size="13" font-weight="400" fill="#94A3B8">what exists today</text>
+
+            <rect x="283" y="130" width="190" height="90" rx="12" fill="#112240" stroke="#1E3A5F"/>
+            <text x="378" y="168" text-anchor="middle">Target</text>
+            <text x="378" y="194" text-anchor="middle" font-size="13" font-weight="400" fill="#94A3B8">zero-touch per lane</text>
+
+            <rect x="506" y="130" width="190" height="90" rx="12" fill="#112240" stroke="#1E3A5F"/>
+            <text x="601" y="168" text-anchor="middle">Transition</text>
+            <text x="601" y="194" text-anchor="middle" font-size="13" font-weight="400" fill="#94A3B8">controlled migration</text>
+
+            <rect x="729" y="130" width="190" height="90" rx="12" fill="#112240" stroke="#1E3A5F"/>
+            <text x="824" y="168" text-anchor="middle">Governance</text>
+            <text x="824" y="194" text-anchor="middle" font-size="13" font-weight="400" fill="#94A3B8">decisions, evidence</text>
+
+            <rect x="952" y="130" width="188" height="90" rx="12" fill="#112240" stroke="#1E3A5F"/>
+            <text x="1046" y="168" text-anchor="middle">Operational change</text>
+            <text x="1046" y="194" text-anchor="middle" font-size="13" font-weight="400" fill="#94A3B8">run, monitor, improve</text>
+          </g>
+          <!-- Arrows between stages -->
+          <g stroke="#0EA5E9" stroke-width="2.5" fill="none" marker-end="url(#arrow)">
+            <line x1="250" y1="175" x2="281" y2="175"/>
+            <line x1="473" y1="175" x2="504" y2="175"/>
+            <line x1="696" y1="175" x2="727" y2="175"/>
+            <line x1="919" y1="175" x2="950" y2="175"/>
+          </g>
+
+          <!-- Service phases under the stages -->
+          <g font-size="14" font-weight="600" fill="#F1F5F9">
+            <rect x="60" y="260" width="88" height="54" rx="9" fill="rgba(14,165,233,0.12)" stroke="rgba(14,165,233,0.35)"/>
+            <text x="104" y="292" text-anchor="middle">Discover</text>
+            <rect x="162" y="260" width="88" height="54" rx="9" fill="rgba(14,165,233,0.12)" stroke="rgba(14,165,233,0.35)"/>
+            <text x="206" y="292" text-anchor="middle">Assess</text>
+
+            <rect x="334" y="260" width="88" height="54" rx="9" fill="rgba(14,165,233,0.12)" stroke="rgba(14,165,233,0.35)"/>
+            <text x="378" y="292" text-anchor="middle">Architect</text>
+
+            <rect x="506" y="260" width="88" height="54" rx="9" fill="rgba(14,165,233,0.12)" stroke="rgba(14,165,233,0.35)"/>
+            <text x="550" y="292" text-anchor="middle">Automate</text>
+            <rect x="608" y="260" width="88" height="54" rx="9" fill="rgba(14,165,233,0.12)" stroke="rgba(14,165,233,0.35)"/>
+            <text x="652" y="292" text-anchor="middle">Migrate</text>
+
+            <rect x="1002" y="260" width="88" height="54" rx="9" fill="rgba(14,165,233,0.12)" stroke="rgba(14,165,233,0.35)"/>
+            <text x="1046" y="292" text-anchor="middle">Operate</text>
+          </g>
+          <!-- Prepare, cross-cutting -->
+          <rect x="60" y="340" width="1030" height="40" rx="9" fill="rgba(124,58,237,0.12)" stroke="rgba(124,58,237,0.4)"/>
+          <text x="575" y="365" text-anchor="middle" font-size="14" font-weight="600" fill="#C4B5FD">Prepare (cross-cutting): shorter validity, changing requirements, crypto-agility</text>
+
+          <!-- Entry points -->
+          <g font-size="13" fill="#CBD5E1">
+            <circle cx="155" cy="112" r="7" fill="#22C55E"/>
+            <text x="172" y="116">Entry 1: start from scratch</text>
+            <circle cx="601" cy="112" r="7" fill="#22C55E"/>
+            <text x="618" y="116">Entry 2: strengthen a running programme</text>
+            <circle cx="60" cy="440" r="7" fill="#22C55E"/>
+            <text x="77" y="444">Entry 3: fill a critical expertise gap, at any stage</text>
+          </g>
+
+          <!-- Feedback loop -->
+          <path d="M1140 200 L1172 200 L1172 412 L28 412 L28 200 L56 200" fill="none" stroke="#0EA5E9" stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#arrow)"/>
+          <text x="600" y="482" text-anchor="middle" font-size="13" fill="#94A3B8">Feedback loop: lessons from operations reopen the baseline for the next iteration</text>
+        </svg>
+      </div>
+      <p class="text-[12px] text-(--color-fg-faint) mt-3">Informed by the TOGAF Architecture Development Method. Not the official TOGAF phases, and no certification is implied.</p>
+    </div>
+  </section>
+
+  <!-- 6. TANGIBLE VALUE -->
+  <section class="py-24" id="value">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <div class="grid lg:grid-cols-[1fr_1.2fr] gap-12 items-start">
+        <div>
+          <span class="eye-pill mb-4 block w-fit">Tangible customer value</span>
+          <h2 class="font-heading font-bold mb-4" style="font-size: clamp(28px, 4vw, 42px); letter-spacing: -0.02em;">
+            Outcomes you can check, scoped to your estate.
+          </h2>
+          <p class="text-[17px] text-(--color-fg-muted) leading-relaxed">
+            These are goals, and how far each one goes depends on scope, access and change windows. We do not publish invented percentages, savings or customer results, and we do not promise zero outages.
+          </p>
+        </div>
+        <ul class="grid sm:grid-cols-2 gap-3 list-none p-0 m-0">
+          {outcomes.map((o) => (
+            <li class="flex gap-3 bg-(--color-surface) border border-(--color-border) rounded-xl p-5">
+              <span class="text-(--color-accent) mt-0.5" aria-hidden="true">✓</span>
+              <span class="text-[14px] text-(--color-fg-2) leading-relaxed">{o}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. CAPABILITY PROOF -->
+  <section class="py-20 bg-(--color-surface)" id="capabilities">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <span class="eye-pill mb-4 block w-fit">Capability</span>
+      <h2 class="font-heading font-bold mb-10" style="font-size: clamp(26px, 3.5vw, 36px); letter-spacing: -0.02em;">
+        Senior PKI and automation experience in regulated environments.
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {capabilities.map((c) => (
+          <div class="bg-(--color-bg) border border-(--color-border) rounded-xl p-6">
+            <h3 class="text-[15px] font-bold mb-2 leading-tight">{c.t}</h3>
+            <p class="text-[13px] text-(--color-fg-2) leading-relaxed">{c.d}</p>
+          </div>
+        ))}
+      </div>
+      <p class="text-[13px] text-(--color-fg-muted) mt-6">Experience across banking, pharmaceutical and public-sector programmes. Customer names and project details are shared only with their clearance.</p>
+    </div>
+  </section>
+
+  <!-- 8 + 11. ASSESSMENT + LEAD FORM -->
+  <section class="py-24" id="assessment">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <div class="grid lg:grid-cols-[1fr_1.1fr] gap-12 items-start">
+        <div>
+          <span class="eye-pill mb-4 block w-fit">CLM Readiness Assessment</span>
+          <h2 class="font-heading font-bold mb-4" style="font-size: clamp(28px, 4vw, 42px); letter-spacing: -0.02em;">
+            Start with the five questions that decide everything else.
+          </h2>
+          <ol class="space-y-3 list-none p-0 m-0 mb-8">
+            {assessmentQuestions.map((q, i) => (
+              <li class="flex gap-3 text-[15px] text-(--color-fg-2)">
+                <span class="font-mono-custom text-(--color-accent) text-[13px] mt-1">0{i + 1}</span>
+                <span>{q}</span>
+              </li>
+            ))}
+          </ol>
+          <div class="bg-(--color-surface) border border-(--color-border) rounded-xl p-6 mb-6">
+            <h3 class="text-[14px] font-bold uppercase tracking-wider text-(--color-fg-muted) mb-3">Deliverables</h3>
+            <ul class="space-y-2 text-[14px] text-(--color-fg-2) list-none p-0 m-0">
+              <li class="flex gap-2"><span class="text-(--color-accent)">▸</span> A baseline view of your certificates, owners and renewal paths</li>
+              <li class="flex gap-2"><span class="text-(--color-accent)">▸</span> Prioritized risks, with the dates that drive them</li>
+              <li class="flex gap-2"><span class="text-(--color-accent)">▸</span> Automation opportunities, lane by lane</li>
+              <li class="flex gap-2"><span class="text-(--color-accent)">▸</span> A 90-day action roadmap</li>
+            </ul>
+          </div>
+          <p class="text-[13px] text-(--color-fg-muted) leading-relaxed">
+            Depth and timing depend on the agreed scope and the access you can grant. Pricing is scoped after the initial discussion.
+          </p>
+        </div>
+
+        <div class="relative bg-(--color-surface) border border-(--color-border) rounded-xl p-8 sm:p-10 overflow-hidden card-accent">
+          <h3 class="font-heading font-bold text-xl mb-2 text-(--color-fg)">Book a CLM Readiness Assessment</h3>
+          <p class="text-[13px] text-(--color-fg-muted) mb-6">Or ask for a conversation with a PKI and CLM architect. Reply within one business day, from Brussels.</p>
+          <form id="clm-form" class="space-y-4" novalidate>
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <input type="hidden" name="utm_source" /><input type="hidden" name="utm_medium" /><input type="hidden" name="utm_campaign" /><input type="hidden" name="utm_content" /><input type="hidden" name="utm_term" />
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium mb-1.5 text-(--color-fg-2)" for="clm-name">Name <span aria-hidden="true" class="text-(--color-accent)">*</span></label>
+                <input type="text" id="clm-name" name="name" required autocomplete="name" maxlength="200" class="w-full rounded-lg px-4 py-3 text-sm text-(--color-fg) border border-(--color-border) focus:outline-none focus:border-(--color-accent) transition-colors" style="background: var(--color-bg);" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1.5 text-(--color-fg-2)" for="clm-email">Work email <span aria-hidden="true" class="text-(--color-accent)">*</span></label>
+                <input type="email" id="clm-email" name="email" required autocomplete="email" maxlength="200" class="w-full rounded-lg px-4 py-3 text-sm text-(--color-fg) border border-(--color-border) focus:outline-none focus:border-(--color-accent) transition-colors" style="background: var(--color-bg);" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1.5 text-(--color-fg-2)" for="clm-company">Company <span aria-hidden="true" class="text-(--color-accent)">*</span></label>
+                <input type="text" id="clm-company" name="company" required autocomplete="organization" maxlength="200" class="w-full rounded-lg px-4 py-3 text-sm text-(--color-fg) border border-(--color-border) focus:outline-none focus:border-(--color-accent) transition-colors" style="background: var(--color-bg);" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1.5 text-(--color-fg-2)" for="clm-role">Role <span aria-hidden="true" class="text-(--color-accent)">*</span></label>
+                <input type="text" id="clm-role" name="role" required autocomplete="organization-title" maxlength="120" placeholder="CISO, PKI owner, platform lead…" class="w-full rounded-lg px-4 py-3 text-sm text-(--color-fg) border border-(--color-border) focus:outline-none focus:border-(--color-accent) transition-colors" style="background: var(--color-bg);" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1.5 text-(--color-fg-2)" for="clm-platform">Current certificate / CLM platform</label>
+                <select id="clm-platform" name="platform" class="w-full rounded-lg px-4 py-3 text-sm text-(--color-fg) border border-(--color-border) focus:outline-none focus:border-(--color-accent) transition-colors" style="background: var(--color-bg);">
+                  {platforms.map((p) => <option>{p}</option>)}
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1.5 text-(--color-fg-2)" for="clm-volume">Approximate certificate volume</label>
+                <select id="clm-volume" name="volume" class="w-full rounded-lg px-4 py-3 text-sm text-(--color-fg) border border-(--color-border) focus:outline-none focus:border-(--color-accent) transition-colors" style="background: var(--color-bg);">
+                  {volumes.map((v) => <option>{v}</option>)}
+                </select>
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1.5 text-(--color-fg-2)" for="clm-challenge">Main challenge <span aria-hidden="true" class="text-(--color-accent)">*</span></label>
+              <textarea id="clm-challenge" name="challenge" rows="3" required maxlength="1200" placeholder="Expiries nobody owns, a tool being retired, a migration that stalled, an audit coming…" class="w-full rounded-lg px-4 py-3 text-sm text-(--color-fg) border border-(--color-border) focus:outline-none focus:border-(--color-accent) transition-colors resize-none" style="background: var(--color-bg);"></textarea>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1.5 text-(--color-fg-2)" for="clm-context">Environment context <span class="text-(--color-fg-faint) font-normal">(optional)</span></label>
+              <textarea id="clm-context" name="context" rows="2" maxlength="600" placeholder="Clouds, CAs, load balancers, Kubernetes, HSM… High level only." class="w-full rounded-lg px-4 py-3 text-sm text-(--color-fg) border border-(--color-border) focus:outline-none focus:border-(--color-accent) transition-colors resize-none" style="background: var(--color-bg);"></textarea>
+              <p class="text-[12px] text-(--color-fg-faint) mt-1.5">Please do not include private keys, credentials or sensitive architecture details in this form.</p>
+            </div>
+            <label class="flex gap-3 items-start text-[13px] text-(--color-fg-muted) cursor-pointer">
+              <input type="checkbox" id="clm-consent" name="consent" required class="mt-0.5 accent-(--color-accent)" />
+              <span>I agree that MYKEYPAIR SRL stores this request to answer it. The data is used for this purpose only, is never sold or shared, and can be deleted on request. See the <a href="/privacy" class="text-(--color-accent)">privacy policy</a>.</span>
+            </label>
+            <button type="submit" id="clm-submit" class="w-full px-8 py-4 bg-(--color-accent) text-white rounded-lg font-semibold font-heading hover:bg-(--color-accent-hover) transition-all btn-glow">
+              Request the assessment →
+            </button>
+            <div id="clm-status" class="text-sm hidden rounded-lg p-3" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. ILLUSTRATIVE SIX-WEEK ROADMAP -->
+  <section class="py-24 bg-(--color-surface)" id="roadmap">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <span class="eye-pill mb-4 block w-fit">Illustrative six-week transition</span>
+      <h2 class="font-heading font-bold mb-4" style="font-size: clamp(28px, 4vw, 42px); letter-spacing: -0.02em;">
+        From discovery to operational handover.
+      </h2>
+      <p class="text-[16px] text-(--color-fg-muted) max-w-[720px] leading-relaxed mb-12">
+        An example sequence for one estate. The real duration depends on environment size, integrations, access and change windows; several lanes usually run in parallel and some wait for a vendor or a maintenance window.
+      </p>
+      <ol class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 list-none p-0 m-0">
+        {roadmap.map((r) => (
+          <li class="bg-(--color-bg) border border-(--color-border) rounded-xl p-5">
+            <div class="font-mono-custom text-[11px] text-(--color-accent) mb-2">{r.w}</div>
+            <h3 class="text-[15px] font-bold mb-2">{r.t}</h3>
+            <p class="text-[13px] text-(--color-fg-2) leading-relaxed">{r.d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 10. USE CASES -->
+  <section class="py-24" id="use-cases">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <span class="eye-pill mb-4 block w-fit">Practical use cases</span>
+      <h2 class="font-heading font-bold mb-10" style="font-size: clamp(28px, 4vw, 42px); letter-spacing: -0.02em;">
+        Where certificate automation usually starts.
+      </h2>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 list-none p-0 m-0">
+        {useCases.map((u) => (
+          <li class="flex gap-3 bg-(--color-surface) border border-(--color-border) rounded-lg px-5 py-4 text-[14px] text-(--color-fg-2)">
+            <span class="text-(--color-accent)" aria-hidden="true">▸</span>{u}
+          </li>
+        ))}
+      </ul>
+      <p class="text-[13px] text-(--color-fg-muted) mt-6">Platform support is confirmed during the assessment for your specific products and versions.</p>
+    </div>
+  </section>
+
+  <!-- CLOSING CTA -->
+  <section class="py-20 mesh-gradient border-t border-(--color-border)">
+    <div class="max-w-[800px] mx-auto px-6 text-center">
+      <h2 class="font-heading font-bold mb-4" style="font-size: clamp(26px, 3.5vw, 38px); letter-spacing: -0.02em;">
+        Know where you stand before the next expiry does it for you.
+      </h2>
+      <p class="text-[16px] text-(--color-fg-muted) mb-8">A readiness assessment gives you the inventory, the owners, the risks and a 90-day plan. Pricing is scoped after a first conversation.</p>
+      <div class="flex flex-wrap justify-center gap-3.5">
+        <a href="#assessment" data-cta="assessment-footer" class="inline-flex items-center px-8 py-4 bg-(--color-accent) text-white rounded-lg font-heading font-semibold text-[15px] no-underline btn-glow">Book a CLM Readiness Assessment →</a>
+        <a href="#assessment" data-cta="architect-footer" class="inline-flex items-center px-8 py-4 rounded-lg font-heading font-semibold text-[15px] text-(--color-accent) no-underline" style="border: 1.5px solid var(--color-accent);">Talk to a PKI &amp; CLM architect</a>
+      </div>
+    </div>
+  </section>
+</LandingLayout>
+
+<script define:vars={{ campaign, unavailableAfter }}>
+  // Campaign expiry: after the end date the page sends visitors to the home page.
+  if (Date.now() > Date.parse(unavailableAfter + 'T23:59:59Z')) { window.location.replace('/'); }
+  // Attribution: read UTM parameters once, persist for the session, attach to the lead.
+  const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+  const STORE_KEY = 'mkp_utm';
+  const params = new URLSearchParams(window.location.search);
+  let utm = {};
+  try { utm = JSON.parse(sessionStorage.getItem(STORE_KEY) || '{}'); } catch { utm = {}; }
+  let found = false;
+  for (const k of UTM_KEYS) { const v = params.get(k); if (v) { utm[k] = v.slice(0, 100); found = true; } }
+  if (!utm.utm_campaign) utm.utm_campaign = campaign;
+  if (!utm.utm_source) {
+    const ref = document.referrer || '';
+    if (/linkedin\./i.test(ref)) { utm.utm_source = 'linkedin'; utm.utm_medium = utm.utm_medium || 'organic'; }
+    else if (/google\./i.test(ref)) { utm.utm_source = 'google'; utm.utm_medium = utm.utm_medium || 'organic'; }
+  }
+  try { if (found || !sessionStorage.getItem(STORE_KEY)) sessionStorage.setItem(STORE_KEY, JSON.stringify(utm)); } catch {}
+
+  const form = document.getElementById('clm-form');
+  for (const k of UTM_KEYS) { const el = form?.elements.namedItem(k); if (el && utm[k]) el.value = utm[k]; }
+
+  // Minimal first-party analytics through the existing endpoint. No cookies, no third parties.
+  const session = Math.random().toString(36).slice(2, 12);
+  const track = (payload) => {
+    try {
+      navigator.sendBeacon?.('/api/analytics', new Blob([JSON.stringify({ session, page: location.pathname, referrer: document.referrer.slice(0, 100), ...payload })], { type: 'application/json' }))
+        || fetch('/api/analytics', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ session, page: location.pathname, ...payload }), keepalive: true });
+    } catch {}
+  };
+  track({ event: 'pageview', device: window.innerWidth < 768 ? 'mobile' : 'desktop', lang: navigator.language });
+  document.querySelectorAll('[data-cta]').forEach((a) => a.addEventListener('click', () => track({ event: 'cta_click', url: a.getAttribute('href') || '', text: a.getAttribute('data-cta') || '' })));
+
+  // Lead form
+  const status = document.getElementById('clm-status');
+  const btn = document.getElementById('clm-submit');
+  const show = (text, ok) => {
+    status.textContent = text;
+    status.className = 'text-sm rounded-lg p-3 ' + (ok ? 'text-green-400' : 'text-red-400');
+    status.style.background = ok ? 'rgba(34,197,94,0.08)' : 'rgba(239,68,68,0.08)';
+    status.classList.remove('hidden');
+  };
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const f = form.elements;
+    const val = (n) => (f.namedItem(n)?.value || '').trim();
+    const required = [['name', 'your name'], ['email', 'a work email'], ['company', 'your company'], ['role', 'your role'], ['challenge', 'your main challenge']];
+    for (const [n, label] of required) { if (!val(n)) { show('Please add ' + label + '.', false); f.namedItem(n)?.focus(); return; } }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val('email'))) { show('Please check the email address.', false); f.namedItem('email')?.focus(); return; }
+    if (!f.namedItem('consent')?.checked) { show('Please confirm the privacy notice so we can answer you.', false); return; }
+
+    const lead = {
+      name: val('name'), email: val('email'), company: val('company'), role: val('role'),
+      platform: val('platform'), volume: val('volume'), challenge: val('challenge'), context: val('context'),
+      page: location.pathname, utm_source: val('utm_source'), utm_medium: val('utm_medium'),
+      utm_campaign: val('utm_campaign'), utm_content: val('utm_content'), utm_term: val('utm_term'),
+      _gotcha: val('_gotcha'),
+    };
+    const message = [
+      'CLM Readiness Assessment request',
+      'Company: ' + lead.company, 'Role: ' + lead.role,
+      'Current platform: ' + lead.platform, 'Certificate volume: ' + lead.volume,
+      'Main challenge: ' + lead.challenge,
+      lead.context ? 'Environment: ' + lead.context : '',
+      'Attribution: ' + UTM_KEYS.map((k) => k + '=' + (lead[k] || '-')).join(' '),
+      'Page: ' + lead.page,
+    ].filter(Boolean).join('\n');
+
+    btn.disabled = true; btn.textContent = 'Sending…'; status.classList.add('hidden');
+    try {
+      const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...lead, subject: 'CLM Readiness Assessment', message }) });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      show('✓ Request received. You will hear from Ismail within one business day.', true);
+      track({ event: 'form_submit', subject: 'clm_assessment' });
+      form.reset();
+      for (const k of UTM_KEYS) { const el = f.namedItem(k); if (el && utm[k]) el.value = utm[k]; }
+    } catch {
+      show('Something went wrong on our side. Email ismail.zemouri@mykeypair.be and we will take it from there.', false);
+    } finally {
+      btn.disabled = false; btn.textContent = 'Request the assessment →';
+    }
+  });
+</script>
