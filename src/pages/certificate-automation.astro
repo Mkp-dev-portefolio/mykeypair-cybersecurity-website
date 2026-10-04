@@ -1,10 +1,12 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import LandingLayout from '../layouts/LandingLayout.astro';
 
 const title = 'Certificate Automation & CLM Transition';
 const description = 'Certificate discovery, lifecycle automation and controlled migration for public TLS and enterprise PKI. Know every certificate, automate every renewal, be ready for shorter TLS lifetimes. Book a CLM Readiness Assessment.';
 const canonical = 'https://mykeypair.be/certificate-automation';
 const campaign = 'clm_transition_2026';
+// Time-boxed campaign page: live until this date, then redirected to the home page (see also the VPS expiry job).
+const unavailableAfter = '2026-11-03';
 
 const sources = {
   digicert: 'https://knowledge.digicert.com/alerts/end-of-life-for-certcentral-automation-and-discovery',
@@ -98,7 +100,7 @@ const jsonLd = {
 };
 ---
 
-<Layout title={title} description={description} canonical={canonical}>
+<LandingLayout title={title} description={description} canonical={canonical} unavailableAfter={unavailableAfter} ctaHref="#assessment" ctaLabel="Book a CLM Readiness Assessment →">
 
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
@@ -519,9 +521,11 @@ const jsonLd = {
       </div>
     </div>
   </section>
-</Layout>
+</LandingLayout>
 
-<script define:vars={{ campaign }}>
+<script define:vars={{ campaign, unavailableAfter }}>
+  // Campaign expiry: after the end date the page sends visitors to the home page.
+  if (Date.now() > Date.parse(unavailableAfter + 'T23:59:59Z')) { window.location.replace('/'); }
   // Attribution: read UTM parameters once, persist for the session, attach to the lead.
   const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
   const STORE_KEY = 'mkp_utm';

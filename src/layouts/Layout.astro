@@ -4,10 +4,9 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
-  canonical?: string;
 }
 
-const { title, description = "MYKEYPAIR — Brussels PKI Consulting Boutique. Senior-only PKI architecture, DORA compliance, and certificate lifecycle automation.", canonical } = Astro.props;
+const { title, description = "MYKEYPAIR — Brussels PKI Consulting Boutique. Senior-only PKI architecture, DORA compliance, and certificate lifecycle automation." } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -22,13 +21,6 @@ const { title, description = "MYKEYPAIR — Brussels PKI Consulting Boutique. Se
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <title>{title} | MYKEYPAIR</title>
-  {canonical && <link rel="canonical" href={canonical} />}
-  {canonical && <meta property="og:type" content="website" />}
-  {canonical && <meta property="og:url" content={canonical} />}
-  {canonical && <meta property="og:title" content={`${title} | MYKEYPAIR`} />}
-  {canonical && <meta property="og:description" content={description} />}
-  {canonical && <meta property="og:site_name" content="MYKEYPAIR" />}
-  {canonical && <meta name="twitter:card" content="summary" />}
 </head>
 <body class="bg-(--color-bg) text-(--color-fg) font-body antialiased">
 
